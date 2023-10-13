@@ -22,12 +22,22 @@ public class EnderecoJson {
 	private String numero;
 	private String bairro;
 	private String cidade;
-	private Estado estado;
+	private String estado;
 	private String cep;
 	
 	public Endereco mapearParaEnderecoDomain(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public EnderecoJson(Endereco endereco) {
+		this.id = endereco.getId();
+		this.rua = endereco.getRua();
+		this.numero = endereco.getNumero();
+		this.bairro = endereco.getBairro();
+		this.cidade = endereco.getCidade();
+		this.estado = String.valueOf(endereco.getEstado());
+		this.cep = endereco.getCep();
 	}
 
 }

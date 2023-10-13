@@ -2,11 +2,11 @@ package com.grupo16.sgpservice.usecase;
 
 import com.grupo16.sgpservice.domain.Endereco;
 
-public class AlterarEnderecoUseCase {
+public class ObterEnderecoUseCase {
 
-	public void alterar(Endereco endereco) {
+	public Endereco obter(String id) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }
