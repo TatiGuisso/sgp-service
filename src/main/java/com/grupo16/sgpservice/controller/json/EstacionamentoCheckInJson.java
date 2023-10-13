@@ -22,18 +22,20 @@ public class EstacionamentoCheckInJson {
 		
 		RegistroEstacionamentoBase registroEstacionamento = null;
 		
+		Veiculo veiculo = Veiculo.builder().id(veiculoId).build();
+		
 		if(TipoEstacionamento.TEMPO_FIXO.equals(tipoEstacionamento)) {
 			
 			registroEstacionamento = RegistroEstacionamentoPeriodoFixo.builder()
 				.id(id)
 				.quantidadeHoras(quantidadeHoras)
-				.veiculo(Veiculo.builder().id(veiculoId).build())
+				.veiculo(veiculo)
 			.build();
 			
 		} else {
 			registroEstacionamento = RegistroEstacionamentoPeriodoVariavel.builder()
 					.id(id)
-					.veiculo(Veiculo.builder().id(veiculoId).build())
+					.veiculo(veiculo)
 					.build();
 		}
 		
