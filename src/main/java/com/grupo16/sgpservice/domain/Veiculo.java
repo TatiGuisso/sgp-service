@@ -1,5 +1,7 @@
 package com.grupo16.sgpservice.domain;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -7,14 +9,10 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class Endereco {
-
+public class Veiculo {
 	private String id;
-	private String rua;
-	private String numero;
-	private String bairro;
-	private String cidade;
-	private Estado estado;
-	private String cep;
+	private String modelo;
+	private String placa;
 	private Condutor condutor;
+	private List<RegistroEstacionamentoBase> registrosPagamento;
 }
