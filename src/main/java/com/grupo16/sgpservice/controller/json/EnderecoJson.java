@@ -25,7 +25,7 @@ public class EnderecoJson {
 	private Estado estado;
 	private String cep;
 	
-	public Endereco mapearParaEnderecoDomain() {
+	public Endereco mapearParaEnderecoDomain(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
