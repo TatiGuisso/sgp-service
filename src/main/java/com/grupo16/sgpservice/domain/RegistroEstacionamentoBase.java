@@ -11,12 +11,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public abstract class RegistroEstacionamentoBase {
 	private String id;
-	private LocalDateTime dataHoraInicio;
-	private LocalDateTime dataHoraTermino;
+	protected LocalDateTime dataHoraInicio;
+	protected LocalDateTime dataHoraTermino;
 	
-	private List<Alerta> alertas;
-	private Veiculo veiculo;
-	private Recibo recibo;
+	protected List<Alerta> alertas;
+	protected Veiculo veiculo;
+	protected Recibo recibo;
 	
 	public void iniciar() {
 		dataHoraInicio = LocalDateTime.now();

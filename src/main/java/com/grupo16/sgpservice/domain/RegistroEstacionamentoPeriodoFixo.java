@@ -12,10 +12,17 @@ public class RegistroEstacionamentoPeriodoFixo extends RegistroEstacionamentoBas
 	
 	private Integer quantidadeHoras;
 
+	
+	
 	@Override
 	public BigDecimal getValor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public void iniciar() {
+		super.iniciar();
+		super.dataHoraTermino = dataHoraInicio.plusHours(quantidadeHoras);
+	}
 }

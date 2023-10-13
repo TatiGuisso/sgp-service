@@ -1,7 +1,5 @@
 package com.grupo16.sgpservice.controller.json;
 
-import java.time.LocalDateTime;
-
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
@@ -15,7 +13,6 @@ import lombok.ToString;
 @ToString
 public class EstacionamentoCheckInJson {
 	private String id;
-	private LocalDateTime dataHoraFim;
 	private Integer quantidadeHoras;
 	private String veiculoId;
 	private TipoEstacionamento tipoEstacionamento;
