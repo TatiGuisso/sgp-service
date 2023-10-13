@@ -7,5 +7,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class RegistroEstacionamentoPeriodoFixo extends RegistroEstacionamentoBase {
 	//TODO - implementar
+	
+	private Integer quantidadeHoras;
 
 }
