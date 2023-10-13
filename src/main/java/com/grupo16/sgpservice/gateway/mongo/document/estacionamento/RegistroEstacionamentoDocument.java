@@ -26,7 +26,7 @@ public class RegistroEstacionamentoDocument {
 	
 	private LocalDateTime dataHoraInicio;
 	private LocalDateTime dataHoraTermino;
-	private VeiculoJson veiculo;
+	private VeiculoJson veiculo;//FIXME: anotar com @DbRef
 	private TipoEstacionamento tipo;
 	
 	public RegistroEstacionamentoDocument(RegistroEstacionamentoBase domain) {
