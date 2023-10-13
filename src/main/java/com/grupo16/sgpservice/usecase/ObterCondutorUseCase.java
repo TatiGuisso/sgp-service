@@ -5,16 +5,11 @@ import org.springframework.stereotype.Service;
 import com.grupo16.sgpservice.domain.Condutor;
 
 @Service
-public class CriarAlterarCondutorUseCase {
+public class ObterCondutorUseCase {
 
-	public String criar(Condutor condutor) {
+	public Condutor obter(String cpf) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void alterar(Condutor condutor) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

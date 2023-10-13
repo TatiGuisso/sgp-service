@@ -22,10 +22,11 @@ public class CondutorJson {
 	private String email;
 	private String telefone;
 	
-	public Condutor mapearParaCondutorDomain() {
+	public Condutor mapearParaCondutorDomain(String id) {
 		return  Condutor.builder()
+				.id(id == null ? this.id : id)
 				.nome(nome)
-				.cpf(cpf)
+				.cpf(removerMascara(this.cpf))
 				.email(email)
 				.telefone(telefone)
 				.build();
@@ -37,6 +38,10 @@ public class CondutorJson {
 		this.cpf = condutor.getCpf();
 		this.email = condutor.getEmail();
 		this.telefone = condutor.getTelefone();
+	}
+	
+	private String removerMascara(String cpf) {
+		return cpf.replace(".", "").replace("-", "").replace(" ", "");
 	}
 	
 }
