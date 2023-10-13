@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.sgpservice.controller.json.EnderecoJson;
 import com.grupo16.sgpservice.domain.Endereco;
-import com.grupo16.sgpservice.usecase.AlterarEnderecoUseCase;
 import com.grupo16.sgpservice.usecase.CriarAlterarEnderecoUseCase;
 import com.grupo16.sgpservice.usecase.ObterEnderecoUseCase;
 
@@ -66,6 +65,9 @@ public class EnderecoController {
 		Endereco endereco = obterEnderecoUseCase.obter(id);
 		
 		EnderecoJson enderecoJson = new EnderecoJson(endereco);
+		log.trace("End enderecoJson={}", enderecoJson);
 		return enderecoJson;
 	}
+	
+	
 }

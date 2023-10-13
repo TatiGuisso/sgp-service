@@ -3,7 +3,6 @@ package com.grupo16.sgpservice.controller.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.Endereco;
-import com.grupo16.sgpservice.domain.Estado;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
