@@ -2,6 +2,7 @@ package com.grupo16.sgpservice.controller.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.grupo16.sgpservice.domain.Endereco;
 import com.grupo16.sgpservice.domain.Estado;
 
 import lombok.AllArgsConstructor;
@@ -23,5 +24,10 @@ public class EnderecoJson {
 	private String cidade;
 	private Estado estado;
 	private String cep;
+	
+	public Endereco mapearParaEnderecoDomain() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
