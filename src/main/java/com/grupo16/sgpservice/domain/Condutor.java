@@ -1,10 +1,12 @@
 package com.grupo16.sgpservice.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@Builder
 public class Condutor {
 	
 	private String id;
