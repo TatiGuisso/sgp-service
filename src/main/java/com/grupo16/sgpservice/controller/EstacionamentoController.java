@@ -15,13 +15,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("estacionamento")
+@RequestMapping()
 public class EstacionamentoController {
 	
 	@Autowired
 	private EstacionamentoCheckInUseCase estacionamentoCheckInUseCase;
 	
-	@PostMapping("check-in")
+	@PostMapping("estacionamentos/check-in")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String checkIn(@RequestBody(required = true) EstacionamentoCheckInJson json) {
 		log.trace("Start json={}", json);

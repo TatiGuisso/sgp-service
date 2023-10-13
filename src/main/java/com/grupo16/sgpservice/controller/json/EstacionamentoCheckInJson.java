@@ -8,8 +8,10 @@ import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
 import com.grupo16.sgpservice.domain.TipoEstacionamento;
 import com.grupo16.sgpservice.domain.Veiculo;
 
+import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @ToString
 public class EstacionamentoCheckInJson {
 	private String id;
