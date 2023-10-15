@@ -3,6 +3,7 @@ package com.grupo16.sgpservice.controller.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.Condutor;
+import com.grupo16.sgpservice.domain.Endereco;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class CondutorJson {
 	private String cpf;
 	private String email;
 	private String telefone;
+	private Endereco endereco;
 	
 	public Condutor mapearParaCondutorDomain(String id) {
 		return  Condutor.builder()
