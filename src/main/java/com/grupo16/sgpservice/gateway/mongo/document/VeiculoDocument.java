@@ -1,4 +1,4 @@
-package com.grupo16.sgpservice.gateway.mongo.document.estacionamento;
+package com.grupo16.sgpservice.gateway.mongo.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Document
-public class VeiculoJson {
+public class VeiculoDocument {
 	
 	@Id
 	private String id;

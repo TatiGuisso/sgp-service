@@ -1,4 +1,4 @@
-package com.grupo16.sgpservice.gateway.mongo.document.estacionamento;
+package com.grupo16.sgpservice.gateway.mongo.document;
 
 import java.time.LocalDateTime;
 
@@ -31,14 +31,14 @@ public class RegistroEstacionamentoDocument {
 	private LocalDateTime dataHoraTermino;
 	
 	@DBRef
-	private VeiculoJson veiculo;
+	private VeiculoDocument veiculo;
 	private TipoEstacionamento tipo;
 	
 	public RegistroEstacionamentoDocument(RegistroEstacionamentoBase domain) {
 		id = domain.getId();
 		dataHoraInicio = domain.getDataHoraInicio();
 		dataHoraTermino = domain.getDataHoraTermino();
-		veiculo = VeiculoJson.builder().id(domain.getId()).build();
+		veiculo = VeiculoDocument.builder().id(domain.getId()).build();
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 	}
 	

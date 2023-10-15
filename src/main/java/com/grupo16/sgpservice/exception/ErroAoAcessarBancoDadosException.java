@@ -3,7 +3,7 @@ package com.grupo16.sgpservice.exception;
 import lombok.Getter;
 
 @Getter
-public class ErroAcessoBancoDadosException extends SystemBaseException {
+public class ErroAoAcessarBancoDadosException extends SystemBaseException {
 	private static final long serialVersionUID = -415384055723475621L;
 	
 	private final String code = "sgp.erroAoAcessarBancoDados";

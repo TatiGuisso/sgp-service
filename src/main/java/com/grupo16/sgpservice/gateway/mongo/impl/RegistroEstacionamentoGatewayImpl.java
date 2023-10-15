@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
-import com.grupo16.sgpservice.exception.ErroAcessoBancoDadosException;
+import com.grupo16.sgpservice.exception.ErroAoAcessarBancoDadosException;
 import com.grupo16.sgpservice.gateway.RegistroEstacionamentoRepositoryGateway;
-import com.grupo16.sgpservice.gateway.mongo.document.estacionamento.RegistroEstacionamentoDocument;
+import com.grupo16.sgpservice.gateway.mongo.document.RegistroEstacionamentoDocument;
 import com.grupo16.sgpservice.gateway.mongo.repository.RegistroEstacionamentoRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class RegistroEstacionamentoGatewayImpl implements RegistroEstacionamento
 		} catch (Exception e) {
 			log.warn("Error to process. registroEstacionamentoBase={}", registroEstacionamento);
 			log.error(e.getMessage(), e);
-			throw new ErroAcessoBancoDadosException();
+			throw new ErroAoAcessarBancoDadosException();
 		}
 		
 	}
