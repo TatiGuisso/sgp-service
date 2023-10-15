@@ -3,6 +3,8 @@ package com.grupo16.sgpservice.gateway.mongo.document.estacionamento;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
@@ -19,6 +21,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Document
 public class RegistroEstacionamentoDocument {
 	
 	@Id
@@ -26,7 +29,9 @@ public class RegistroEstacionamentoDocument {
 	
 	private LocalDateTime dataHoraInicio;
 	private LocalDateTime dataHoraTermino;
-	private VeiculoJson veiculo;//FIXME: anotar com @DbRef
+	
+	@DBRef
+	private VeiculoJson veiculo;
 	private TipoEstacionamento tipo;
 	
 	public RegistroEstacionamentoDocument(RegistroEstacionamentoBase domain) {

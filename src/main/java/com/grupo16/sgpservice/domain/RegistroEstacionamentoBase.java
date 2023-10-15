@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
+@ToString
 public abstract class RegistroEstacionamentoBase {
 	private String id;
 	protected LocalDateTime dataHoraInicio;

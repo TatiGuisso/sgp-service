@@ -27,7 +27,7 @@ public class CriarAlterarCondutorUseCase {
 		
 		String id = condutorRepositoryGateway.salvar(condutor);
 		
-		return null;
+		return id;
 	}
 
 	public void alterar(Condutor condutor) {

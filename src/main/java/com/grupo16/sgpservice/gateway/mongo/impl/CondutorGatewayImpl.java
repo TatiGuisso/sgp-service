@@ -1,4 +1,4 @@
-package com.grupo16.sgpservice.gateway.adapter;
+package com.grupo16.sgpservice.gateway.mongo.impl;
 
 import java.util.Optional;
 
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class CondutorMongoGateway implements CondutorRepositoryGateway{
+public class CondutorGatewayImpl implements CondutorRepositoryGateway{
 	
 	@Override
 	public Optional<Condutor> obter(String cpf) {

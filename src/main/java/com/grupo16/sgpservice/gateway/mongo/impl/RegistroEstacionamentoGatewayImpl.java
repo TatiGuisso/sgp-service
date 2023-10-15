@@ -1,4 +1,4 @@
-package com.grupo16.sgpservice.gateway.mongo;
+package com.grupo16.sgpservice.gateway.mongo.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class RegistroEstacionamentoMongoAdapter implements RegistroEstacionamentoRepositoryGateway {
+public class RegistroEstacionamentoGatewayImpl implements RegistroEstacionamentoRepositoryGateway {
 
 	@Autowired
 	private RegistroEstacionamentoRepository registroEstacionamentoRepository;
