@@ -18,22 +18,33 @@ public class CriarAlterarCondutorUseCase {
 	@Autowired
 	private CondutorRepositoryGateway condutorRepositoryGateway;
 	
+	@Autowired
+	private ObterCondutorUseCase obterCondutorUseCase;
+	
 	public String criar(Condutor condutor) {
 		
-		Optional<Condutor> condutorOp = condutorRepositoryGateway.obter(condutor.getCpf());
+		Optional<Condutor> condutorOp = condutorRepositoryGateway.obterPorCpf(condutor.getCpf());
 		if(condutorOp.isPresent()) {
 			log.warn("CPF já cadastrado: {}", condutor.getCpf());
 			throw new CpfJaCadastradoException();
 		}
 		
-		String id = condutorRepositoryGateway.salvar(condutor);
-		
-		return id;
+		return condutorRepositoryGateway.salvar(condutor);
 	}
 
 	public void alterar(Condutor condutor) {
-		// TODO Auto-generated method stub
 		
+		Condutor condutorEncontrado = obterCondutorUseCase.obter(condutor.getId());
+		
+		Condutor condutorSalvar = Condutor.builder()
+				.id(condutorEncontrado.getId())
+				.nome(condutor.getNome())
+				.cpf(condutorEncontrado.getCpf())
+				.email(condutor.getEmail())
+				.telefone(condutor.getTelefone())
+				.build();
+		
+		condutorRepositoryGateway.salvar(condutorSalvar);
 	}
 
 }

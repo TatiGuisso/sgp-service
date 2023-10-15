@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class CondutorGatewayImpl implements CondutorRepositoryGateway{
+public class CondutorRepositoryGatewayImpl implements CondutorRepositoryGateway{
 	
 	@Autowired
 	private CondutorRepository condutorRepository;
@@ -34,23 +34,38 @@ public class CondutorGatewayImpl implements CondutorRepositoryGateway{
 	}
 
 	@Override
-	public Optional<Condutor> obter(String cpf) {
+	public Optional<Condutor> obterPorCpf(String cpf) {
 		try {
-			Optional<Condutor> condutorOptional = Optional.empty();
 			Optional<CondutorDocument> condutorDocOp = condutorRepository.findByCpf(cpf);
 			
-			if(condutorDocOp.isEmpty()) {
-				return condutorOptional;
-			}
+			return checarSeExisteEMapearParaDomain(condutorDocOp);
 			
-			condutorOptional = Optional.of(condutorDocOp.get().mapearParaDomain());
-			
-			return condutorOptional;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErroAoAcessarBancoDadosException();
 		}
 	}
 
+	@Override
+	public Optional<Condutor> obter(String id) {
+		try {
+			Optional<CondutorDocument> condutorDocOp = condutorRepository.findById(id);
+		
+			return checarSeExisteEMapearParaDomain(condutorDocOp);
+
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
+	}
+
+	private Optional<Condutor> checarSeExisteEMapearParaDomain(Optional<CondutorDocument> condutorDocOp) {
+		Optional<Condutor> condutorOptional = Optional.empty();
+		if(condutorDocOp.isEmpty()) {
+			return condutorOptional;
+		}
+		condutorOptional = Optional.of(condutorDocOp.get().mapearParaDomain());
+		return condutorOptional;
+	}
 
 }
