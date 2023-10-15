@@ -13,12 +13,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Endereco {
 
-	private String id;
 	private String rua;
 	private String numero;
 	private String bairro;
 	private String cidade;
 	private Estado estado;
 	private String cep;
-//	private Condutor condutor;
 }

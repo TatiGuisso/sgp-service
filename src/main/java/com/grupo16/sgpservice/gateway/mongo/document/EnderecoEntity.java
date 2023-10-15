@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-//@Document
 @Getter
 @Builder
 @ToString
@@ -17,8 +16,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class EnderecoEntity {
 
-//	@Id
-	private String id;
 	private String rua;
 	private String numero;
 	private String bairro;
@@ -26,25 +23,17 @@ public class EnderecoEntity {
 	private String estado;
 	private String cep;
 	
-//	@DBRef
-//	private Condutor condutor;
-	
 	public EnderecoEntity(Endereco endereco) {
-		id = endereco.getId();
 		rua = endereco.getRua();
 		numero = endereco.getNumero();
 		bairro = endereco.getBairro();
 		cidade = endereco.getCidade();
 		estado = endereco.getEstado().toString();
 		cep = endereco.getCep();	
-//		condutor = Condutor.builder()
-//				.id(endereco.getCondutor().getId())
-//				.build();
 	}
 	
 	public Endereco parseEnderecoDomain() {
 		return Endereco.builder()
-				.id(id)
 				.rua(rua)
 				.numero(numero)
 				.bairro(bairro)

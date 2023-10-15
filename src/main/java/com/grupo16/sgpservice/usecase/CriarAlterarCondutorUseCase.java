@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupo16.sgpservice.domain.Condutor;
-import com.grupo16.sgpservice.domain.Endereco;
 import com.grupo16.sgpservice.gateway.CondutorRepositoryGateway;
 import com.grupo16.sgpservice.usecase.exception.CpfJaCadastradoException;
 
