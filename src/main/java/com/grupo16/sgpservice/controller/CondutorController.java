@@ -70,7 +70,7 @@ public class CondutorController {
 		
 		String cpfCondutor = removerMascara(cpf);
 		
-		Condutor condutor = obterCondutorUseCase.obter(cpfCondutor);
+		Condutor condutor = obterCondutorUseCase.obterPorCpf(cpfCondutor);
 		
 		CondutorJson condutorJson = new CondutorJson(condutor);
 		
