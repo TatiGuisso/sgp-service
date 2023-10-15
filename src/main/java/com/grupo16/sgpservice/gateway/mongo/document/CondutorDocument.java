@@ -33,4 +33,14 @@ public class CondutorDocument {
 		email = condutor.getEmail();
 		telefone = condutor.getTelefone();
 	}
+	
+	public Condutor mapearParaDomain() {
+		return Condutor.builder()
+				.id(id)
+				.nome(nome)
+				.cpf(cpf)
+				.email(email)
+				.telefone(telefone)
+				.build();
+	}
 }

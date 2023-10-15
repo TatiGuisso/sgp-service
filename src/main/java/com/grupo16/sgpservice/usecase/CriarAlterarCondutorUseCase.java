@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.grupo16.sgpservice.domain.Condutor;
 import com.grupo16.sgpservice.gateway.CondutorRepositoryGateway;
+import com.grupo16.sgpservice.usecase.exception.CpfJaCadastradoException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +23,7 @@ public class CriarAlterarCondutorUseCase {
 		Optional<Condutor> condutorOp = condutorRepositoryGateway.obter(condutor.getCpf());
 		if(condutorOp.isPresent()) {
 			log.warn("CPF já cadastrado: {}", condutor.getCpf());
-			//TODO implementar exception. Condutor já cadastrado.
+			throw new CpfJaCadastradoException();
 		}
 		
 		String id = condutorRepositoryGateway.salvar(condutor);

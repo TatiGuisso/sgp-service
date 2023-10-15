@@ -36,10 +36,16 @@ public class CondutorGatewayImpl implements CondutorRepositoryGateway{
 	@Override
 	public Optional<Condutor> obter(String cpf) {
 		try {
+			Optional<Condutor> condutorOptional = Optional.empty();
+			Optional<CondutorDocument> condutorDocOp = condutorRepository.findByCpf(cpf);
 			
+			if(condutorDocOp.isEmpty()) {
+				return condutorOptional;
+			}
 			
+			condutorOptional = Optional.of(condutorDocOp.get().mapearParaDomain());
 			
-			return Optional.empty();
+			return condutorOptional;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErroAoAcessarBancoDadosException();
