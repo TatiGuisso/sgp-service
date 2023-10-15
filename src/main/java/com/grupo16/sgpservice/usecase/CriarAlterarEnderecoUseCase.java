@@ -21,13 +21,13 @@ public class CriarAlterarEnderecoUseCase {
 		
 		//o condutor já possui um endereço cadastrado. Caso deseje alterá-lo, por favor escolher a opção correta. 
 		
-		String idCondutor = endereco.getCondutor().getId() == null ? null : endereco.getCondutor().getId(); 
+//		String idCondutor = endereco.getCondutor().getId() == null ? null : endereco.getCondutor().getId(); 
 		
-		Optional<Endereco> enderecoOp = enderecoRepositoryGateway.obterPorCondutorId(idCondutor);
+//		Optional<Endereco> enderecoOp = enderecoRepositoryGateway.obterPorCondutorId(idCondutor);
 		
-		if(enderecoOp.isPresent()) {
-			log.warn("");
-		}
+//		if(enderecoOp.isPresent()) {
+//			log.warn("");
+//		}
 		
 		enderecoRepositoryGateway.salvar(endereco);
 

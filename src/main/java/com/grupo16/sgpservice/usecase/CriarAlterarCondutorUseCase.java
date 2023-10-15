@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupo16.sgpservice.domain.Condutor;
+import com.grupo16.sgpservice.domain.Endereco;
 import com.grupo16.sgpservice.gateway.CondutorRepositoryGateway;
 import com.grupo16.sgpservice.usecase.exception.CpfJaCadastradoException;
 
@@ -42,6 +43,7 @@ public class CriarAlterarCondutorUseCase {
 				.cpf(condutorEncontrado.getCpf())
 				.email(condutor.getEmail())
 				.telefone(condutor.getTelefone())
+				.endereco(condutor.getEndereco() == null ? null : condutor.getEndereco())
 				.build();
 		
 		condutorRepositoryGateway.salvar(condutorSalvar);
