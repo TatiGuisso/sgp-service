@@ -15,4 +15,7 @@ public class VeiculoDocument {
 	
 	@Id
 	private String id;
+	private String marca;
+	private String modelo;
+	private String placa;
 }

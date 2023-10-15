@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class Veiculo {
 	private String id;
+	private String marca;
 	private String modelo;
 	private String placa;
 	private Condutor condutor;

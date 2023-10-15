@@ -36,17 +36,12 @@ public class CondutorJson {
 	}
 
 	public CondutorJson(Condutor condutor) {
-		EnderecoJson enderecoJson = null;
-		if(condutor.getEndereco() != null) {
-			enderecoJson = new EnderecoJson(condutor.getEndereco());
-		}
-
 		this.id = condutor.getId();
 		this.nome = condutor.getNome();
 		this.cpf = condutor.getCpf();
 		this.email = condutor.getEmail();
 		this.telefone = condutor.getTelefone();
-		this.endereco = enderecoJson;
+		this.endereco = condutor.getEndereco() == null ? null : new EnderecoJson(condutor.getEndereco());
 	}
 
 	private String removerMascara(String cpf) {
