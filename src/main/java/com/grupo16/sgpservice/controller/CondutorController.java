@@ -40,7 +40,7 @@ public class CondutorController {
 			@RequestBody(required = true)CondutorJson condutorJson) {
 		log.trace("Start condutorJson={}", condutorJson);
 		
-		Condutor condutor = condutorJson.mapearParaCondutorDomain(null);
+		Condutor condutor = condutorJson.parseCondutorDomain(null);
 		
 		String id = criarAlterarCondutorUseCase.criar(condutor);
 		
@@ -55,7 +55,7 @@ public class CondutorController {
 			@RequestBody(required = true) CondutorJson condutorJson) {
 		log.trace("Start id={}, condutorJson={}", id, condutorJson);
 		
-		Condutor condutor = condutorJson.mapearParaCondutorDomain(id);
+		Condutor condutor = condutorJson.parseCondutorDomain(id);
 		
 		criarAlterarCondutorUseCase.alterar(condutor);
 		

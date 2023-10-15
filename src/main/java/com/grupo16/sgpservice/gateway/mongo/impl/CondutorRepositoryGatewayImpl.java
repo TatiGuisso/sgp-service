@@ -74,7 +74,7 @@ public class CondutorRepositoryGatewayImpl implements CondutorRepositoryGateway{
 		if(condutorDocOp.isEmpty()) {
 			return condutorOptional;
 		}
-		condutorOptional = Optional.of(condutorDocOp.get().mapearParaDomain());
+		condutorOptional = Optional.of(condutorDocOp.get().parseCondutorDomain());
 		return condutorOptional;
 	}
 

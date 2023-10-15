@@ -25,6 +25,7 @@ public class CondutorDocument {
 	private String cpf;
 	private String email;
 	private String telefone;
+	private EnderecoEntity endereco;
 	
 	public CondutorDocument(Condutor condutor) {
 		id = condutor.getId();
@@ -32,15 +33,17 @@ public class CondutorDocument {
 		cpf = condutor.getCpf();
 		email = condutor.getEmail();
 		telefone = condutor.getTelefone();
+		endereco = condutor.getEndereco() == null ? null : new EnderecoEntity(condutor.getEndereco());
 	}
 	
-	public Condutor mapearParaDomain() {
+	public Condutor parseCondutorDomain() {
 		return Condutor.builder()
 				.id(id)
 				.nome(nome)
 				.cpf(cpf)
 				.email(email)
 				.telefone(telefone)
+				.endereco(endereco == null ? null : endereco.parseEnderecoDomain())
 				.build();
 	}
 }

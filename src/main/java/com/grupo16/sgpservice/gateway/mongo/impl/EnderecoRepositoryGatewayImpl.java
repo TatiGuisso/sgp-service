@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.grupo16.sgpservice.domain.Endereco;
 import com.grupo16.sgpservice.exception.ErroAoAcessarBancoDadosException;
 import com.grupo16.sgpservice.gateway.EnderecoRepositoryGateway;
-import com.grupo16.sgpservice.gateway.mongo.document.EnderecoDocument;
+import com.grupo16.sgpservice.gateway.mongo.document.EnderecoEntity;
 import com.grupo16.sgpservice.gateway.mongo.repository.EnderecoRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class EnderecoRepositoryGatewayImpl implements EnderecoRepositoryGateway{
 	public String salvar(Endereco endereco) {
 		try {
 			
-			EnderecoDocument enderecoDocument = new EnderecoDocument(endereco);
+			EnderecoEntity enderecoDocument = new EnderecoEntity(endereco);
 			
 			enderecoRepository.save(enderecoDocument);
 			

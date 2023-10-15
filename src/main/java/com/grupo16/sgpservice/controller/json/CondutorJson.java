@@ -3,7 +3,6 @@ package com.grupo16.sgpservice.controller.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.Condutor;
-import com.grupo16.sgpservice.domain.Endereco;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,28 +21,36 @@ public class CondutorJson {
 	private String cpf;
 	private String email;
 	private String telefone;
-	private Endereco endereco;
-	
-	public Condutor mapearParaCondutorDomain(String id) {
+	private EnderecoJson endereco;
+
+	public Condutor parseCondutorDomain(String idCondutor) {
+
 		return  Condutor.builder()
-				.id(id == null ? this.id : id)
+				.id(idCondutor == null ? this.id : idCondutor)
 				.nome(nome)
 				.cpf(removerMascara(this.cpf))
 				.email(email)
 				.telefone(telefone)
+				.endereco(this.endereco == null ? null : this.endereco.parseEnderecoDomain())
 				.build();
 	}
 
 	public CondutorJson(Condutor condutor) {
+		EnderecoJson enderecoJson = null;
+		if(condutor.getEndereco() != null) {
+			enderecoJson = new EnderecoJson(condutor.getEndereco());
+		}
+
 		this.id = condutor.getId();
 		this.nome = condutor.getNome();
 		this.cpf = condutor.getCpf();
 		this.email = condutor.getEmail();
 		this.telefone = condutor.getTelefone();
+		this.endereco = enderecoJson;
 	}
-	
+
 	private String removerMascara(String cpf) {
 		return cpf.replace(".", "").replace("-", "").replace(" ", "");
 	}
-	
+
 }

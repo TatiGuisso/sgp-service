@@ -25,22 +25,22 @@ public class EnderecoJson {
 	private String cidade;
 	private String estado;
 	private String cep;
-	private Condutor condutor;
+//	private Condutor condutor;
 	
-	public Endereco mapearParaEnderecoDomain(String idEndereco, String idCondutor) {
-		Condutor condutor = Condutor.builder()
-				.id(idCondutor == null ? this.condutor.getId() : idCondutor)
-				.build();
+	public Endereco parseEnderecoDomain() {
+//		Condutor condutor = Condutor.builder()
+//				.id(idCondutor == null ? this.condutor.getId() : idCondutor)
+//				.build();
 		
 		return Endereco.builder()
-				.id(idEndereco == null ? this.id : idEndereco)
+//				.id(idEndereco == null ? this.id : idEndereco)
 				.rua(rua)
 				.numero(numero)
 				.bairro(bairro)
 				.cidade(cidade)
 				.estado(Estado.valueOf(estado))
 				.cep(cep)
-				.condutor(condutor)
+//				.condutor(condutor)
 				.build();
 	}
 
@@ -52,9 +52,9 @@ public class EnderecoJson {
 		this.cidade = endereco.getCidade();
 		this.estado = String.valueOf(endereco.getEstado());
 		this.cep = endereco.getCep();
-		this.condutor = Condutor.builder()
-				.id(endereco.getCondutor().getId())
-				.build();
+//		this.condutor = Condutor.builder()
+//				.id(endereco.getCondutor().getId())
+//				.build();
 	}
 
 }

@@ -1,10 +1,5 @@
 package com.grupo16.sgpservice.gateway.mongo.document;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.grupo16.sgpservice.domain.Condutor;
 import com.grupo16.sgpservice.domain.Endereco;
 import com.grupo16.sgpservice.domain.Estado;
 
@@ -14,15 +9,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Document
+//@Document
 @Getter
 @Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnderecoDocument {
+public class EnderecoEntity {
 
-	@Id
+//	@Id
 	private String id;
 	private String rua;
 	private String numero;
@@ -31,10 +26,10 @@ public class EnderecoDocument {
 	private String estado;
 	private String cep;
 	
-	@DBRef
-	private Condutor condutor;
+//	@DBRef
+//	private Condutor condutor;
 	
-	public EnderecoDocument(Endereco endereco) {
+	public EnderecoEntity(Endereco endereco) {
 		id = endereco.getId();
 		rua = endereco.getRua();
 		numero = endereco.getNumero();
@@ -42,12 +37,12 @@ public class EnderecoDocument {
 		cidade = endereco.getCidade();
 		estado = endereco.getEstado().toString();
 		cep = endereco.getCep();	
-		condutor = Condutor.builder()
-				.id(endereco.getCondutor().getId())
-				.build();
+//		condutor = Condutor.builder()
+//				.id(endereco.getCondutor().getId())
+//				.build();
 	}
 	
-	public Endereco parseDomain() {
+	public Endereco parseEnderecoDomain() {
 		return Endereco.builder()
 				.id(id)
 				.rua(rua)
