@@ -16,16 +16,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class CondutorRepositoryGatewayImpl implements CondutorRepositoryGateway{
-	
+
 	@Autowired
 	private CondutorRepository condutorRepository;
-	
+
 	@Override
 	public String salvar(Condutor condutor) {
-		
+
 		try {
 			return condutorRepository.save(new CondutorDocument(condutor)).getId();
-			
+
 		} catch (Exception e) {
 			log.warn("Error to process. condutor={}", condutor);
 			log.error(e.getMessage(), e);
@@ -37,9 +37,9 @@ public class CondutorRepositoryGatewayImpl implements CondutorRepositoryGateway{
 	public Optional<Condutor> obterPorCpf(String cpf) {
 		try {
 			Optional<CondutorDocument> condutorDocOp = condutorRepository.findByCpf(cpf);
-			
+
 			return checarSeExisteEMapearParaDomain(condutorDocOp);
-			
+
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErroAoAcessarBancoDadosException();
@@ -50,9 +50,19 @@ public class CondutorRepositoryGatewayImpl implements CondutorRepositoryGateway{
 	public Optional<Condutor> obter(String id) {
 		try {
 			Optional<CondutorDocument> condutorDocOp = condutorRepository.findById(id);
-		
+
 			return checarSeExisteEMapearParaDomain(condutorDocOp);
 
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
+	}
+
+	@Override
+	public void remover(String id) {
+		try {
+			condutorRepository.deleteById(id);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErroAoAcessarBancoDadosException();
@@ -67,5 +77,6 @@ public class CondutorRepositoryGatewayImpl implements CondutorRepositoryGateway{
 		condutorOptional = Optional.of(condutorDocOp.get().mapearParaDomain());
 		return condutorOptional;
 	}
+
 
 }

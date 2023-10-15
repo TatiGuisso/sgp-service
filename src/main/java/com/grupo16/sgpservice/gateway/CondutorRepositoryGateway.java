@@ -12,5 +12,7 @@ public interface CondutorRepositoryGateway {
 
 	public String salvar(Condutor condutor);
 
+	public void remover(String id);
+
 
 }
