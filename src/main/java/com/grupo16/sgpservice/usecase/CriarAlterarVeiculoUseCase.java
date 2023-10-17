@@ -12,13 +12,28 @@ public class CriarAlterarVeiculoUseCase {
 	@Autowired
 	private VeiculoRepositoryGateway veiculoRepositoryGateway;
 
+	@Autowired
+	private ObterVeiculoUseCase obterVeiculoUseCase;
+
+
 	public String criar(Veiculo veiculo) {
 		return veiculoRepositoryGateway.salvar(veiculo);
 	}
 
 	public void alterar(Veiculo veiculo) {
-		// TODO Auto-generated method stub
-		
+
+		Veiculo veiculoEncontrado = obterVeiculoUseCase.obter(veiculo.getId());
+
+		Veiculo veiculoSalvar = Veiculo.builder()
+				.id(veiculoEncontrado.getId())
+				.marca(veiculo.getMarca())
+				.modelo(veiculo.getModelo())
+				.placa(veiculo.getPlaca())
+				.condutor(veiculo.getCondutor())
+				.registrosPagamento(veiculo.getRegistrosPagamento())
+				.build();
+
+		veiculoRepositoryGateway.salvar(veiculoSalvar);
 	}
 
 }

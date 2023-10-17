@@ -85,5 +85,4 @@ public class VeiculoController {
 		removerVeiculoUseCase.remover(id);
 		log.trace("End");
 	}
-	
 }
