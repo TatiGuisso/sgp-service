@@ -37,8 +37,15 @@ public class VeiculoRepositoryGatewayImpl implements VeiculoRepositoryGateway{
 
 	@Override
 	public Optional<Veiculo> obter(String idVeiculo) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+
+		try {
+			Optional<VeiculoDocument> veiculoDocOp = veiculoRepository.findById(idVeiculo);
+
+			return checarSeExisteEMapearParaDomain(veiculoDocOp);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
 	}
 	
 	@Override
@@ -47,5 +54,13 @@ public class VeiculoRepositoryGatewayImpl implements VeiculoRepositoryGateway{
 		
 	}
 
-	
+	private Optional<Veiculo> checarSeExisteEMapearParaDomain(Optional<VeiculoDocument> veiculoDocOp) {
+		Optional<Veiculo> veiculoOptional = Optional.empty();
+
+		if(veiculoDocOp.isEmpty()) {
+			return veiculoOptional;
+		}
+		veiculoOptional = Optional.of(veiculoDocOp.get().parseVeiculoDomain());
+		return veiculoOptional;
+	}
 }

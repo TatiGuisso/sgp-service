@@ -49,7 +49,7 @@ public class VeiculoController {
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	public void alterar(
 			@PathVariable(required = true, name = "id") String idVeiculo,
 			@RequestBody(required = true) VeiculoJson veiculoJson) {
@@ -63,7 +63,7 @@ public class VeiculoController {
 		
 	}
 	
-	@GetMapping("{idVeiculo}")
+	@GetMapping("/{idVeiculo}")
 	public VeiculoJson obter(
 			@PathVariable(required = true, name = "idVeiculo") String idVeiculo) {
 		log.trace("Start idVeiculo={}", idVeiculo);

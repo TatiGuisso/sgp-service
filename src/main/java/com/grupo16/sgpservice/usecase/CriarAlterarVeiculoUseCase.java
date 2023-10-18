@@ -29,8 +29,6 @@ public class CriarAlterarVeiculoUseCase {
 				.marca(veiculo.getMarca())
 				.modelo(veiculo.getModelo())
 				.placa(veiculo.getPlaca())
-				.condutor(veiculo.getCondutor())
-				.registrosPagamento(veiculo.getRegistrosPagamento())
 				.build();
 
 		veiculoRepositoryGateway.salvar(veiculoSalvar);

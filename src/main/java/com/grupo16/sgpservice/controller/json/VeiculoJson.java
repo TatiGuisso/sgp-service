@@ -22,8 +22,9 @@ public class VeiculoJson {
 	private String placa;
 
 	public Veiculo parseVeiculoDomain(String idVeiculo) {
+
 		return  Veiculo.builder()
-				.id(idVeiculo == null ? null : idVeiculo)
+				.id(idVeiculo == null ? this.id : idVeiculo)
 				.marca(marca)
 				.modelo(modelo)
 				.placa(placa)
