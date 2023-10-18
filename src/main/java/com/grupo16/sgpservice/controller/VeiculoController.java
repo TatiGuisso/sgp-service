@@ -49,9 +49,9 @@ public class VeiculoController {
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("/{id}")
+	@PutMapping("/{idVeiculo}")
 	public void alterar(
-			@PathVariable(required = true, name = "id") String idVeiculo,
+			@PathVariable(required = true, name = "idVeiculo") String idVeiculo,
 			@RequestBody(required = true) VeiculoJson veiculoJson) {
 		log.trace("Start idVeiculo={}, veiculoJson={}", idVeiculo, veiculoJson);
 		
@@ -77,12 +77,12 @@ public class VeiculoController {
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{idVeiculo}")
 	public void remover(
-			@PathVariable(required = true, name = "id") String id) {
-		log.trace("Start id={}",id);
+			@PathVariable(required = true, name = "idVeiculo") String idVeiculo) {
+		log.trace("Start id={}",idVeiculo);
 		
-		removerVeiculoUseCase.remover(id);
+		removerVeiculoUseCase.remover(idVeiculo);
 		log.trace("End");
 	}
 }

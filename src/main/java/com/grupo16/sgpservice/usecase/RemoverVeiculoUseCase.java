@@ -20,7 +20,6 @@ public class RemoverVeiculoUseCase {
 		Veiculo veiculo = obterVeiculoUseCase.obter(id);
 		
 		veiculoRepositoryGateway.remover(veiculo.getId());
-		
 	}
 
 }

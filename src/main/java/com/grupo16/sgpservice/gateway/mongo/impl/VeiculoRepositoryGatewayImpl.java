@@ -50,8 +50,12 @@ public class VeiculoRepositoryGatewayImpl implements VeiculoRepositoryGateway{
 	
 	@Override
 	public void remover(String id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			veiculoRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
 	}
 
 	private Optional<Veiculo> checarSeExisteEMapearParaDomain(Optional<VeiculoDocument> veiculoDocOp) {
