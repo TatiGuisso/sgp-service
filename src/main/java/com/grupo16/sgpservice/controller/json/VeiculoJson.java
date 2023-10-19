@@ -20,6 +20,7 @@ public class VeiculoJson {
 	private String marca;
 	private String modelo;
 	private String placa;
+	private CondutorJson condutor;
 
 	public Veiculo parseVeiculoDomain(String idVeiculo) {
 
@@ -28,6 +29,7 @@ public class VeiculoJson {
 				.marca(marca)
 				.modelo(modelo)
 				.placa(placa)
+				.condutor(condutor == null ? null : condutor.parseCondutorDomain(condutor.getId()))
 				.build();
 	}
 
@@ -36,6 +38,7 @@ public class VeiculoJson {
 		this.marca = veiculo.getMarca();
 		this.modelo = veiculo.getModelo();
 		this.placa = veiculo.getPlaca();
+		this.condutor = veiculo.getCondutor() == null ? null : new CondutorJson(veiculo.getCondutor());
 	}
 
 }
