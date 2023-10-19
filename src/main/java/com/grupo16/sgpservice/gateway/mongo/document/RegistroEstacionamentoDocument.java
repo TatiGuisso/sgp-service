@@ -29,6 +29,7 @@ public class RegistroEstacionamentoDocument {
 	
 	private LocalDateTime dataHoraInicio;
 	private LocalDateTime dataHoraTermino;
+	private Integer quantidadeHoras;
 	
 	@DBRef
 	private VeiculoDocument veiculo;
@@ -38,6 +39,7 @@ public class RegistroEstacionamentoDocument {
 		id = domain.getId();
 		dataHoraInicio = domain.getDataHoraInicio();
 		dataHoraTermino = domain.getDataHoraTermino();
+		quantidadeHoras = domain instanceof RegistroEstacionamentoPeriodoFixo ? ((RegistroEstacionamentoPeriodoFixo) domain).getQuantidadeHoras() : null;
 		veiculo = VeiculoDocument.builder().id(domain.getId()).build();
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 	}

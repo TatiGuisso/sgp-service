@@ -19,6 +19,7 @@ public abstract class RegistroEstacionamentoBase {
 	protected List<Alerta> alertas;
 	protected Veiculo veiculo;
 	protected Recibo recibo;
+	protected Tarifa tarifa;
 	
 	public void iniciar() {
 		dataHoraInicio = LocalDateTime.now();
