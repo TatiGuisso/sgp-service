@@ -16,7 +16,7 @@ public abstract class RegistroEstacionamentoBase {
 	protected LocalDateTime dataHoraInicio;
 	protected LocalDateTime dataHoraTermino;
 	
-	protected List<Alerta> alertas;
+	protected List<Notificacao> notificacoes;
 	protected Veiculo veiculo;
 	protected Recibo recibo;
 	protected Tarifa tarifa;

@@ -2,6 +2,7 @@ package com.grupo16.sgpservice.controller.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.grupo16.sgpservice.domain.Condutor;
 import com.grupo16.sgpservice.domain.Veiculo;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class VeiculoJson {
 				.marca(marca)
 				.modelo(modelo)
 				.placa(placa)
-				.condutor(condutor == null ? null : condutor.parseCondutorDomain(condutor.getId()))
+				.condutor(condutor == null ? null : Condutor.builder().id(condutor.getId()).build())
 				.build();
 	}
 

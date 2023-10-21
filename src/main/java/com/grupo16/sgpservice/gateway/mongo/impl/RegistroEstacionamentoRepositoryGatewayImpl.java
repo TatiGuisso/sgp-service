@@ -1,7 +1,7 @@
 package com.grupo16.sgpservice.gateway.mongo.impl;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -85,6 +85,19 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 			log.error(e.getMessage(), e);
 			throw new ErroAoAcessarBancoDadosException();
 		}
+	}
+
+	@Override
+	public List<RegistroEstacionamentoBase> getByDataHoraInicioBetweenDataHoraTermino(
+			LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino) {
+		
+		List<RegistroEstacionamentoDocument> registrosDocument = registroEstacionamentoRepository.findByDataHoraTerminoBetween(dataHoraInicio, dataHoraTermino);
+		System.out.println("Document: "+ registrosDocument);
+		
+		List<RegistroEstacionamentoBase> registros = registrosDocument.stream().map(re -> re.parseRegistroDomain()).toList();
+		System.out.println("Domain: "+ registros);
+		
+		return registros;
 	}
 
 }
