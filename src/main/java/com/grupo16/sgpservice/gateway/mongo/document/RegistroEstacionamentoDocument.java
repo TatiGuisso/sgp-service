@@ -40,7 +40,7 @@ public class RegistroEstacionamentoDocument {
 		dataHoraInicio = domain.getDataHoraInicio();
 		dataHoraTermino = domain.getDataHoraTermino();
 		quantidadeHoras = domain instanceof RegistroEstacionamentoPeriodoFixo ? ((RegistroEstacionamentoPeriodoFixo) domain).getQuantidadeHoras() : null;
-		veiculo = VeiculoDocument.builder().id(domain.getId()).build();
+		veiculo = VeiculoDocument.builder().id(domain.getVeiculo().getId()).build();
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 	}
 	
