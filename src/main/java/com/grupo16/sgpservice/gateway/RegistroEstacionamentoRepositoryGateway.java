@@ -7,7 +7,9 @@ import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 
 public interface RegistroEstacionamentoRepositoryGateway {
 	
-	String criar(RegistroEstacionamentoBase registroEstacionamentoBase);
+	String salvar(RegistroEstacionamentoBase registroEstacionamento);
+	
+	void salvar(List<RegistroEstacionamentoBase> registrosEstacionamento);
 
 	RegistroEstacionamentoBase getById(String id);
 	

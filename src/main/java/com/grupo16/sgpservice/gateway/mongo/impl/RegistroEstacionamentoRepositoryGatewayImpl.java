@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
@@ -33,7 +34,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 	
 	
 	@Override
-	public String criar(RegistroEstacionamentoBase registroEstacionamento) {
+	public String salvar(RegistroEstacionamentoBase registroEstacionamento) {
 		try {
 			return registroEstacionamentoRepository.save(new RegistroEstacionamentoDocument(registroEstacionamento)).getId();
 			
@@ -98,6 +99,12 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 		System.out.println("Domain: "+ registros);
 		
 		return registros;
+	}
+
+	@Override
+	@Transactional
+	public void salvar(List<RegistroEstacionamentoBase> registrosEstacionamento) {
+		registrosEstacionamento.forEach(this::salvar);
 	}
 
 }

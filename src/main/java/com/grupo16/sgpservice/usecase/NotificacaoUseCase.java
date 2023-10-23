@@ -1,9 +1,7 @@
 package com.grupo16.sgpservice.usecase;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,7 @@ public class NotificacaoUseCase {
 	private NotificacaoRepositoryGateway notificacaoRepositoryGateway;
 	
 	public void notificar(LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim) {
-		
-		//FIXME remover parametros, descomentar as datas abaixo:
-		
-//		LocalDateTime dataHoraInicio = LocalDateTime.now();
-//		LocalDateTime dataHoraFim = LocalDateTime.now().plusMinutes(20);
+		final LocalDateTime now = LocalDateTime.now();
 		
 		List<RegistroEstacionamentoBase> registrosEstacionamento = 
 				estacionamentoRepositoryGateway.getByDataHoraInicioBetweenDataHoraTermino(dataHoraInicio, dataHoraFim);
@@ -36,6 +30,7 @@ public class NotificacaoUseCase {
 		List<Notificacao> notificacoes = new ArrayList<>();
 		
 		for (RegistroEstacionamentoBase re : registrosEstacionamento) {
+			re.setDataHoraUltimaNotificacao(now);
 			
 			notificacoes.add(Notificacao.builder()
 					.dataHoraInicio(dataHoraInicio)
@@ -44,9 +39,9 @@ public class NotificacaoUseCase {
 					.build());
 		}
 		
-		System.out.println("notificacoes: "+ notificacoes);
 		notificacaoRepositoryGateway.notificar(notificacoes);//Ainda não existe. Deve chamar um serviço que irá notificar.
 		
+		estacionamentoRepositoryGateway.salvar(registrosEstacionamento);
 	}
 
 }

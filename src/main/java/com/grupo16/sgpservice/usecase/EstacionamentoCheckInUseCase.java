@@ -14,7 +14,7 @@ public class EstacionamentoCheckInUseCase {
 	
 	public String ckeckIn(RegistroEstacionamentoBase registroEstacionamento) {
 		registroEstacionamento.iniciar();
-		return estacionamentoRepositoryGateway.criar(registroEstacionamento);
+		return estacionamentoRepositoryGateway.salvar(registroEstacionamento);
 	}
 	
 }

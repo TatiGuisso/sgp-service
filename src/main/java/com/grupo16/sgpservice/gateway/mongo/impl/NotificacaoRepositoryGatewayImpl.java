@@ -15,12 +15,7 @@ public class NotificacaoRepositoryGatewayImpl implements NotificacaoRepositoryGa
 	
 	@Override
 	public void notificar(List<Notificacao> notificacoes) {
-		try {
-			//
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+		log.warn("### NÃO HA NOTIFICAÇÃO IMPLEMENTADA NESTA VERSÃO: MAS DEVE CHAMAR UM SERVIÇO ESPECIFICO ###");
 	}
 
 }
