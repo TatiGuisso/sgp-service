@@ -18,6 +18,9 @@ public abstract class RegistroEstacionamentoBase {
 	protected LocalDateTime dataHoraTermino;
 	
 	@Setter
+	protected String idSolicitacaoPagamento;
+	
+	@Setter
 	protected LocalDateTime dataHoraPrevisaoNotificacao;
 	
 	@Setter

@@ -34,6 +34,7 @@ public class RegistroEstacionamentoDocument {
 	private LocalDateTime dataHoraUltimaNotificacao;
 	private LocalDateTime dataHoraPrevisaoNotificacao;
 	private Long quantidadeHoras;
+	protected String idSolicitacaoPagamento;
 	
 	@DBRef
 	private VeiculoDocument veiculo;
@@ -48,6 +49,7 @@ public class RegistroEstacionamentoDocument {
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
 		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
+		idSolicitacaoPagamento = domain.getIdSolicitacaoPagamento();
 	}
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {

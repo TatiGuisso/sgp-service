@@ -1,8 +1,8 @@
 package com.grupo16.sgpservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.sgpservice.controller.json.PagamentoResponseJson;
@@ -17,7 +17,7 @@ public class PagamentoController {
 	@Autowired
 	private SolicitarPagamentoUseCase efetuarPagamentoUseCase;
 	
-	@PostMapping("estacionamentos/{id}/pagamentos")
+	@PatchMapping("estacionamentos/{id}/pagamentos")
 	public PagamentoResponseJson efetuar(@PathVariable("id") String estacionamentoId) {
 		log.trace("Start estacionamentoId={}", estacionamentoId);
 		
