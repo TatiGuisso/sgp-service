@@ -33,8 +33,9 @@ public class RegistroEstacionamentoPeriodoFixo extends RegistroEstacionamentoBas
 	}
 
 	@Override
-	public void iniciar() {
-		super.iniciar();
+	public void iniciar(Long minutosProximaNotificacao) {
+		super.iniciar(null);
 		super.dataHoraTermino = dataHoraInicio.plusHours(quantidadeHoras);
+		super.dataHoraPrevisaoNotificacao = LocalDateTime.from(dataHoraTermino);
 	}
 }

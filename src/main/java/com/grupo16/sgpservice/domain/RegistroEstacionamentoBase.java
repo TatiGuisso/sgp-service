@@ -18,6 +18,9 @@ public abstract class RegistroEstacionamentoBase {
 	protected LocalDateTime dataHoraTermino;
 	
 	@Setter
+	protected LocalDateTime dataHoraPrevisaoNotificacao;
+	
+	@Setter
 	protected LocalDateTime dataHoraUltimaNotificacao;
 	
 	protected Boolean deveNotificar;
@@ -27,8 +30,9 @@ public abstract class RegistroEstacionamentoBase {
 	protected Recibo recibo;
 	protected Tarifa tarifa;
 	
-	public void iniciar() {
+	public void iniciar(Long minutosProximaNotificacao) {
 		dataHoraInicio = LocalDateTime.now();
+		dataHoraPrevisaoNotificacao = dataHoraInicio.plusMinutes(minutosProximaNotificacao); 
 	}
 	
 	public abstract BigDecimal getValor();

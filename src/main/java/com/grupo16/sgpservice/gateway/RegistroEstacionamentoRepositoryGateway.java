@@ -13,6 +13,6 @@ public interface RegistroEstacionamentoRepositoryGateway {
 
 	RegistroEstacionamentoBase getById(String id);
 	
-	List<RegistroEstacionamentoBase> getByDataHoraInicioBetweenDataHoraTermino(LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino);
+	List<RegistroEstacionamentoBase> getByDataHoraPrevisaoNotificacaoBetween(LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino);
 
 }

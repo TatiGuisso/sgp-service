@@ -24,7 +24,7 @@ public class NotificacaoController {
 		
 		//FIXME esse controler é temporário, está sendo usado somente para teste do fluxo.
 		
-		notificacaoUseCase.notificar(dataInicio, dataFim);
+		//notificacaoUseCase.notificar(dataInicio, dataFim);
 		
 	}
 

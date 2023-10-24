@@ -9,10 +9,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class RegistroEstacionamentoPeriodoVariavel extends RegistroEstacionamentoBase {
 	//TODO - implementar
-	
+
 	@Override
 	public BigDecimal getValor() {
-	// TODO Auto-generated method stub
-	return null;
-}
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

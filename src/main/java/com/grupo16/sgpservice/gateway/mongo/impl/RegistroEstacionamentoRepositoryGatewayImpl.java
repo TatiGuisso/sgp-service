@@ -89,7 +89,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 	}
 
 	@Override
-	public List<RegistroEstacionamentoBase> getByDataHoraInicioBetweenDataHoraTermino(
+	public List<RegistroEstacionamentoBase> getByDataHoraPrevisaoNotificacaoBetween(
 			LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino) {
 		
 		List<RegistroEstacionamentoDocument> registrosDocument = registroEstacionamentoRepository.findByDataHoraTerminoBetween(dataHoraInicio, dataHoraTermino);

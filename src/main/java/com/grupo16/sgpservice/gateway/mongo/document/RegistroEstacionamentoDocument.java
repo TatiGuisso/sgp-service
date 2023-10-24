@@ -1,8 +1,6 @@
 package com.grupo16.sgpservice.gateway.mongo.document;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -34,6 +32,7 @@ public class RegistroEstacionamentoDocument {
 	private LocalDateTime dataHoraInicio;
 	private LocalDateTime dataHoraTermino;
 	private LocalDateTime dataHoraUltimaNotificacao;
+	private LocalDateTime dataHoraPrevisaoNotificacao;
 	private Integer quantidadeHoras;
 	
 	@DBRef
@@ -48,6 +47,7 @@ public class RegistroEstacionamentoDocument {
 		veiculo = VeiculoDocument.builder().id(domain.getVeiculo().getId()).build();
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
+		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
 	}
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {
