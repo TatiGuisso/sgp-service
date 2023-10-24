@@ -1,7 +1,7 @@
 package com.grupo16.sgpservice.domain;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.ToString;
@@ -11,10 +11,10 @@ import lombok.ToString;
 public class Tarifa {
 	private String id;
 	private BigDecimal valorUnitario;//Hora
-	private Map<Integer, BigDecimal> tabelaHoraPreco;
+	private List<Preco> tabelaHoraPreco;
 	
-	public BigDecimal getPrecoHoraTabelada(Integer hora) {
-		return tabelaHoraPreco.get(hora);
+	public BigDecimal getPrecoHoraTabelada(Long hora) {
+		return tabelaHoraPreco.stream().filter(p -> p.getHora().equals(hora)).findAny().get().getValor();
 	}
 			
 	public BigDecimal getValorPelaQuantidadeHoras(Long quantidadeHora) {

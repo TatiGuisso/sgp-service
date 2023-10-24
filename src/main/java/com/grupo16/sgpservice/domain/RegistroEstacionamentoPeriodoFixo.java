@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 public class RegistroEstacionamentoPeriodoFixo extends RegistroEstacionamentoBase {
 	
-	private Integer quantidadeHoras;
+	private Long quantidadeHoras;
 
 	@Override
 	public BigDecimal getValor() {
@@ -34,7 +34,7 @@ public class RegistroEstacionamentoPeriodoFixo extends RegistroEstacionamentoBas
 
 	@Override
 	public void iniciar(Long minutosProximaNotificacao) {
-		super.iniciar(null);
+		dataHoraInicio = LocalDateTime.now();
 		super.dataHoraTermino = dataHoraInicio.plusHours(quantidadeHoras);
 		super.dataHoraPrevisaoNotificacao = LocalDateTime.from(dataHoraTermino);
 	}

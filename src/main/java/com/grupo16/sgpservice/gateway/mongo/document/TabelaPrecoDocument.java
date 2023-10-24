@@ -2,6 +2,7 @@ package com.grupo16.sgpservice.gateway.mongo.document;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
@@ -15,6 +16,6 @@ public class TabelaPrecoDocument {
 	private String id;
 	private LocalDate vigencia;
 	private BigDecimal precoHora;//Estacionamento de tempo variavel.
-	private Map<Integer, BigDecimal> precosHora;//Estacionamento de tempo fixo.
+	private List<PrecoEntity> precosHora;//Estacionamento de tempo fixo.
 
 }

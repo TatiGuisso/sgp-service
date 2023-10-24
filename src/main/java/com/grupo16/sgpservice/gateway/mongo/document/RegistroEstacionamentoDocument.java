@@ -33,7 +33,7 @@ public class RegistroEstacionamentoDocument {
 	private LocalDateTime dataHoraTermino;
 	private LocalDateTime dataHoraUltimaNotificacao;
 	private LocalDateTime dataHoraPrevisaoNotificacao;
-	private Integer quantidadeHoras;
+	private Long quantidadeHoras;
 	
 	@DBRef
 	private VeiculoDocument veiculo;

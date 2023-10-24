@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class EstacionamentoCheckInJson {
 	private String id;
-	private Integer quantidadeHoras;
+	private Long quantidadeHoras;
 	private String veiculoId;
 	private TipoEstacionamento tipoEstacionamento;
 	

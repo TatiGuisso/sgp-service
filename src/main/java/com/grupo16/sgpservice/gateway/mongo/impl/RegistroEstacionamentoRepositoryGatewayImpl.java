@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.grupo16.sgpservice.domain.Preco;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
@@ -53,10 +54,12 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 			RegistroEstacionamentoDocument registroEstacionamentoDocument = registroEstacionamentoRepository.findById(id).get();
 			
 			TabelaPrecoDocument tabelaPreco = tabelaPrecoRepository.findByVigencia(null);
+			
+			
 			Tarifa tarifa = Tarifa.builder()
 					.id(id)
 					.valorUnitario(tabelaPreco.getPrecoHora())
-					.tabelaHoraPreco(tabelaPreco.getPrecosHora())
+					.tabelaHoraPreco(tabelaPreco.getPrecosHora().stream().map(pe -> Preco.builder().hora(pe.getHora()).valor(pe.getValor()).build()).toList())
 					.build();
 			
 			RegistroEstacionamentoBase re = null;
