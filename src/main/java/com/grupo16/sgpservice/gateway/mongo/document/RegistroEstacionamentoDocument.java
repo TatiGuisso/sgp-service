@@ -34,7 +34,7 @@ public class RegistroEstacionamentoDocument {
 	private LocalDateTime dataHoraUltimaNotificacao;
 	private LocalDateTime dataHoraPrevisaoNotificacao;
 	private Long quantidadeHoras;
-	protected String idSolicitacaoPagamento;
+	protected PagamentoEntity pagamento;
 	
 	@DBRef
 	private VeiculoDocument veiculo;
@@ -49,7 +49,7 @@ public class RegistroEstacionamentoDocument {
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
 		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
-		idSolicitacaoPagamento = domain.getIdSolicitacaoPagamento();
+		pagamento = new PagamentoEntity(domain.getPagamento());
 	}
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {
@@ -77,6 +77,7 @@ public class RegistroEstacionamentoDocument {
 					.dataHoraTermino(dataHoraTermino)
 					.quantidadeHoras(quantidadeHoras)
 					.veiculo(veiculoDomain)
+					.pagamento(pagamento.getDomain())
 					.build();
 		}
 		

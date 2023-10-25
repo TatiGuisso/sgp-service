@@ -18,7 +18,7 @@ public abstract class RegistroEstacionamentoBase {
 	protected LocalDateTime dataHoraTermino;
 	
 	@Setter
-	protected String idSolicitacaoPagamento;
+	protected Pagamento pagamento;
 	
 	@Setter
 	protected LocalDateTime dataHoraPrevisaoNotificacao;
@@ -39,4 +39,14 @@ public abstract class RegistroEstacionamentoBase {
 	}
 	
 	public abstract BigDecimal getValor();
+	
+	public void setStatusPagamento(StatusPagamento statusPagamento) {
+		pagamento.setStatus(statusPagamento);
+	}
+
+	public void criarSolicitacaoPagamento(String idSolicitacaoPagamento) {
+		pagamento = Pagamento.builder()
+				.idSolicitacaoPagamento(idSolicitacaoPagamento)
+				.status(StatusPagamento.AGUARDANDO_PAGAMENTO).build();
+	}
 }

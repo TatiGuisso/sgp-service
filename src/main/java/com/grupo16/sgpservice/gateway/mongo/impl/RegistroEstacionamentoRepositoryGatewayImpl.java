@@ -2,6 +2,7 @@ package com.grupo16.sgpservice.gateway.mongo.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -108,6 +109,25 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 	@Transactional
 	public void salvar(List<RegistroEstacionamentoBase> registrosEstacionamento) {
 		registrosEstacionamento.forEach(this::salvar);
+	}
+
+	@Override
+	public Optional<RegistroEstacionamentoBase> getBySolicitacaoPagamento(String solicitacaoPagamentoId) {
+		try {
+			Optional<RegistroEstacionamentoDocument> pagamentoEntityOp = registroEstacionamentoRepository.findByPagamentoIdSolicitacaoPagamento(solicitacaoPagamentoId);
+			
+			Optional<RegistroEstacionamentoBase> registroEstacionamentoOp = Optional.empty();
+			
+			if(pagamentoEntityOp.isPresent()) {
+				registroEstacionamentoOp = Optional.of(pagamentoEntityOp.get().parseRegistroDomain());
+			}
+			
+			return registroEstacionamentoOp;
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
 	}
 
 }

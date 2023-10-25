@@ -3,7 +3,6 @@ package com.grupo16.sgpservice.gateway.mongo.document;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 

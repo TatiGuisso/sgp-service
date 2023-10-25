@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.gateway.PagamentoGateway;
 import com.grupo16.sgpservice.gateway.RegistroEstacionamentoRepositoryGateway;
-import com.grupo16.sgpservice.gateway.mongo.repository.RegistroEstacionamentoRepository;
 
 @Service
 public class SolicitarPagamentoUseCase {
@@ -26,7 +25,7 @@ public class SolicitarPagamentoUseCase {
 		
 		String idSolicitacaoPagamento = pagamentoGateway.solicitar(rEstacionamento);
 		
-		rEstacionamento.setIdSolicitacaoPagamento(idSolicitacaoPagamento);
+		rEstacionamento.criarSolicitacaoPagamento(idSolicitacaoPagamento);
 		
 		registroEstacionamentoRepositoryGateway.salvar(rEstacionamento);
 		

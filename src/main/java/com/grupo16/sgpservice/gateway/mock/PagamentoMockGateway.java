@@ -4,7 +4,9 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
+import com.grupo16.sgpservice.domain.Pagamento;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
+import com.grupo16.sgpservice.domain.StatusPagamento;
 import com.grupo16.sgpservice.gateway.PagamentoGateway;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,16 @@ public class PagamentoMockGateway implements PagamentoGateway {
 		log.warn("### MOCK DE PAGAMENTO ###");
 		
 		return UUID.randomUUID().toString();
+	}
+
+	@Override
+	public Pagamento findById(String solicitacaoPagamentoId) {
+		log.warn("### MOCK DE PAGAMENTO ###");
+
+		return Pagamento.builder().idSolicitacaoPagamento(solicitacaoPagamentoId)
+				.status(StatusPagamento.PAGO)
+				.sistemaPagamento("MOCK")
+				.build();
 	}
 
 }
