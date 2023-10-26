@@ -49,7 +49,7 @@ public class RegistroEstacionamentoDocument {
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
 		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
 		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
-		pagamento = new PagamentoEntity(domain.getPagamento());
+		pagamento = domain.getPagamento() == null ? null : new PagamentoEntity(domain.getPagamento());
 	}
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {
