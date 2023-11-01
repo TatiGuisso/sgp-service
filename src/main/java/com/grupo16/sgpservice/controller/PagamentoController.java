@@ -31,7 +31,9 @@ public class PagamentoController {
 		
 		final String idSolicitacaoPagamento = efetuarPagamentoUseCase.solicitar(estacionamentoId);
 		
-		PagamentoResponseJson pagamentoResponseJson = new PagamentoResponseJson(idSolicitacaoPagamento);
+		PagamentoResponseJson pagamentoResponseJson = PagamentoResponseJson.builder()
+				.idSolicitacaoPagamento(idSolicitacaoPagamento)
+				.build();
 		
 		log.trace("End pagamentoResponseJson={}", pagamentoResponseJson);
 		return pagamentoResponseJson;

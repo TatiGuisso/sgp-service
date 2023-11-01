@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,13 +54,15 @@ public class EstacionamentoController {
 	}
 	
 	@GetMapping("estacionamentos/{id}/recibo")
-	public ReciboJson getRecibo(@PathVariable("id") String estacionamentoId) {
-		log.trace("Start estacionamentoId={}", estacionamentoId);
+	public ReciboJson getRecibo(
+			@PathVariable("id") String estacionamentoId,
+			@RequestParam(name = "status") String status) {
+		log.trace("Start estacionamentoId={}, status={}", estacionamentoId, status);
 		
-		RegistroEstacionamentoBase registroEstacionamento = getEstacionamentoUseCase.getById(estacionamentoId);
-		PrecoResponseJson response = new PrecoResponseJson(registroEstacionamento);
+		RegistroEstacionamentoBase registroEstacionamento = getEstacionamentoUseCase.getByIdAndPagamentoStatus(estacionamentoId, status);
+		ReciboJson reciboJson = new ReciboJson(registroEstacionamento);
 		
-		log.trace("End response={}", response);
-		return null;
+		log.trace("End response={}", reciboJson);
+		return reciboJson;
 	}
 }

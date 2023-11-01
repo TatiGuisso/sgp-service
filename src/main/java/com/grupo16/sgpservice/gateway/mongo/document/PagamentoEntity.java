@@ -28,6 +28,7 @@ public class PagamentoEntity {
 				.idSolicitacaoPagamento(idSolicitacaoPagamento)
 				.status(status)
 				.sistemaPagamento(sistemaPagamento)
+				.valorPago(valorPago)
 				.build();
 	}
 	

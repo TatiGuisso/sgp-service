@@ -20,6 +20,7 @@ import com.grupo16.sgpservice.exception.ErroAoAcessarBancoDadosException;
 import com.grupo16.sgpservice.gateway.RegistroEstacionamentoRepositoryGateway;
 import com.grupo16.sgpservice.gateway.mongo.document.RegistroEstacionamentoDocument;
 import com.grupo16.sgpservice.gateway.mongo.document.TabelaPrecoDocument;
+import com.grupo16.sgpservice.gateway.mongo.impl.exception.RegistroEstacionamentoNaoEncontradoException;
 import com.grupo16.sgpservice.gateway.mongo.repository.RegistroEstacionamentoRepository;
 import com.grupo16.sgpservice.gateway.mongo.repository.TabelaPrecoRepository;
 
@@ -104,16 +105,42 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 			throw new ErroAoAcessarBancoDadosException();
 		}
 	}
+	
+	@Override
+	public Optional<RegistroEstacionamentoBase> getByIdAndPagamentoStatus(String id, String status) {
+		
+		try {
+			Optional<RegistroEstacionamentoDocument> reDocumentOptional = registroEstacionamentoRepository.findByIdAndPagamentoStatus(id, status);
+			
+			Optional<RegistroEstacionamentoBase> reOptional = Optional.empty();
+			
+			if(reDocumentOptional.isPresent()) {
+				reOptional = Optional.of(reDocumentOptional.get().parseRegistroDomain());
+			}
+			
+			return reOptional;
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
+	}
 
 	@Override
 	public List<RegistroEstacionamentoBase> getByDataHoraPrevisaoNotificacaoBetween(
 			LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino) {
 		
-		List<RegistroEstacionamentoDocument> registrosDocument = registroEstacionamentoRepository.findByDataHoraTerminoBetween(dataHoraInicio, dataHoraTermino);
-		
-		List<RegistroEstacionamentoBase> registros = registrosDocument.stream().map(re -> re.parseRegistroDomain()).toList();
-		
-		return registros;
+		try {
+			List<RegistroEstacionamentoDocument> registrosDocument = registroEstacionamentoRepository.findByDataHoraTerminoBetween(dataHoraInicio, dataHoraTermino);
+			
+			List<RegistroEstacionamentoBase> registros = registrosDocument.stream().map(re -> re.parseRegistroDomain()).toList();
+			
+			return registros;
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoAcessarBancoDadosException();
+		}
 	}
 
 	@Override
