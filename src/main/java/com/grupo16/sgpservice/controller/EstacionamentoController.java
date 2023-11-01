@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.sgpservice.controller.json.EstacionamentoCheckInJson;
 import com.grupo16.sgpservice.controller.json.PrecoResponseJson;
+import com.grupo16.sgpservice.controller.json.ReciboJson;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.usecase.EstacionamentoCheckInUseCase;
 import com.grupo16.sgpservice.usecase.GetEstacionamentoUseCase;
@@ -49,5 +50,16 @@ public class EstacionamentoController {
 		
 		log.trace("End response={}", response);
 		return response;
+	}
+	
+	@GetMapping("estacionamentos/{id}/recibo")
+	public ReciboJson getRecibo(@PathVariable("id") String estacionamentoId) {
+		log.trace("Start estacionamentoId={}", estacionamentoId);
+		
+		RegistroEstacionamentoBase registroEstacionamento = getEstacionamentoUseCase.getById(estacionamentoId);
+		PrecoResponseJson response = new PrecoResponseJson(registroEstacionamento);
+		
+		log.trace("End response={}", response);
+		return null;
 	}
 }

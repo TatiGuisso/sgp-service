@@ -31,6 +31,7 @@ public abstract class RegistroEstacionamentoBase {
 	protected List<Notificacao> notificacoes;
 	protected Veiculo veiculo;
 	protected Recibo recibo;
+	@Setter
 	protected Tarifa tarifa;
 	
 	public void iniciar(Long minutosProximaNotificacao) {
@@ -42,6 +43,10 @@ public abstract class RegistroEstacionamentoBase {
 	
 	public void setStatusPagamento(StatusPagamento statusPagamento) {
 		pagamento.setStatus(statusPagamento);
+	}
+	
+	public void setValorPago() {
+		pagamento.setValorPago(getValor().doubleValue());
 	}
 
 	public void criarSolicitacaoPagamento(String idSolicitacaoPagamento) {
