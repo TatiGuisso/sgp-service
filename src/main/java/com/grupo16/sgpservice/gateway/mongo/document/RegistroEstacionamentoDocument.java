@@ -53,6 +53,9 @@ public class RegistroEstacionamentoDocument {
 	}
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {
+		
+		//FIXME retornar o tipo variavel.
+		
 		if(tipo.equals(TipoEstacionamento.TEMPO_FIXO)) {
 			
 			Condutor condutor = Condutor.builder()

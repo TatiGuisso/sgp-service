@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.grupo16.sgpservice.domain.Condutor;
 import com.grupo16.sgpservice.domain.Preco;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
@@ -52,7 +53,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 	public RegistroEstacionamentoBase getById(String id) {
 		try {
 			
-			RegistroEstacionamentoDocument registroEstacionamentoDocument = registroEstacionamentoRepository.findById(id).get();
+			RegistroEstacionamentoDocument reDocument = registroEstacionamentoRepository.findById(id).get();
 			
 			TabelaPrecoDocument tabelaPreco = tabelaPrecoRepository.findByVigencia(null);
 			
@@ -64,21 +65,33 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 					.build();
 			
 			RegistroEstacionamentoBase re = null;
-			if(TipoEstacionamento.TEMPO_FIXO.equals(registroEstacionamentoDocument.getTipo())) {
+			Condutor condutor = Condutor.builder()
+					.id(reDocument.getVeiculo().getCondutor().getId())
+					.nome(reDocument.getVeiculo().getCondutor().getNome())
+					.cpf(reDocument.getVeiculo().getCondutor().getCpf())
+					.build();
+					
+			Veiculo veiculo = Veiculo.builder()
+					.id(reDocument.getVeiculo().getId())
+					.placa(reDocument.getVeiculo().getPlaca())
+					.condutor(condutor)
+					.build();
+			
+			if(TipoEstacionamento.TEMPO_FIXO.equals(reDocument.getTipo())) {
 				re = RegistroEstacionamentoPeriodoFixo.builder()
 						.id(id)
-						.dataHoraInicio(registroEstacionamentoDocument.getDataHoraInicio())
-						.dataHoraTermino(registroEstacionamentoDocument.getDataHoraTermino())
-						.quantidadeHoras(registroEstacionamentoDocument.getQuantidadeHoras())
-						.veiculo(Veiculo.builder().id(registroEstacionamentoDocument.getVeiculo().getId()).build())
+						.dataHoraInicio(reDocument.getDataHoraInicio())
+						.dataHoraTermino(reDocument.getDataHoraTermino())
+						.quantidadeHoras(reDocument.getQuantidadeHoras())
+						.veiculo(veiculo)
 						.tarifa(tarifa)
 						.build();
 			} else {
 				re = RegistroEstacionamentoPeriodoVariavel.builder()
 						.id(id)
-						.dataHoraInicio(registroEstacionamentoDocument.getDataHoraInicio())
-						.dataHoraTermino(registroEstacionamentoDocument.getDataHoraTermino())
-						.veiculo(Veiculo.builder().id(registroEstacionamentoDocument.getVeiculo().getId()).build())
+						.dataHoraInicio(reDocument.getDataHoraInicio())
+						.dataHoraTermino(reDocument.getDataHoraTermino())
+						.veiculo(veiculo)
 						.tarifa(tarifa)
 						.build();
 			}
@@ -97,10 +110,8 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 			LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino) {
 		
 		List<RegistroEstacionamentoDocument> registrosDocument = registroEstacionamentoRepository.findByDataHoraTerminoBetween(dataHoraInicio, dataHoraTermino);
-		System.out.println("Document: "+ registrosDocument);
 		
 		List<RegistroEstacionamentoBase> registros = registrosDocument.stream().map(re -> re.parseRegistroDomain()).toList();
-		System.out.println("Domain: "+ registros);
 		
 		return registros;
 	}

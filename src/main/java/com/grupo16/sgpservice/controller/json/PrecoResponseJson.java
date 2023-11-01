@@ -7,13 +7,13 @@ import lombok.Getter;
 @Getter
 public class PrecoResponseJson {
 	private String registroEstacionamentoId;
-	private String veiculoId;
-	private Double preco;
+	private Double precoEstacionamento;	
+	private VeiculoJson veiculo;
 	
 	public PrecoResponseJson(RegistroEstacionamentoBase domain) {
 		registroEstacionamentoId = domain.getId();
-		veiculoId = domain.getVeiculo().getId();
-		preco = domain.getValor().doubleValue();
+		precoEstacionamento = domain.getValor().doubleValue();
+		veiculo = domain.getVeiculo() == null ? null : new VeiculoJson(domain.getVeiculo());
 	}
 	
 }

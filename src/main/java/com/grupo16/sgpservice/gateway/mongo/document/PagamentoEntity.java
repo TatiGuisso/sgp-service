@@ -3,8 +3,12 @@ package com.grupo16.sgpservice.gateway.mongo.document;
 import com.grupo16.sgpservice.domain.Pagamento;
 import com.grupo16.sgpservice.domain.StatusPagamento;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class PagamentoEntity {
 	private String idSolicitacaoPagamento;
