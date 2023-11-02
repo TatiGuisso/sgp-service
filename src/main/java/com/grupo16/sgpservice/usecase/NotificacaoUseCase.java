@@ -46,8 +46,9 @@ public class NotificacaoUseCase {
 			notificacoes.add(Notificacao.builder().registroEstacionamento(re).build());
 		}
 		
-		notificacaoRepositoryGateway.notificar(notificacoes);//Não implementado. Deve chamar um serviço que irá notificar.
-		
-		estacionamentoRepositoryGateway.salvar(registrosEstacionamento);
+		if(!registrosEstacionamento.isEmpty()) {
+			notificacaoRepositoryGateway.notificar(notificacoes);//Não implementado. Deve chamar um serviço que irá notificar.
+			estacionamentoRepositoryGateway.salvar(registrosEstacionamento);
+		}
 	}
 }

@@ -38,6 +38,12 @@ public abstract class RegistroEstacionamentoBase {
 		dataHoraInicio = LocalDateTime.now();
 		dataHoraPrevisaoNotificacao = dataHoraInicio.plusMinutes(minutosProximaNotificacao); 
 	}
+
+	public void encerrar() {
+		LocalDateTime now = LocalDateTime.now();
+		dataHoraTermino = now;
+		dataHoraPrevisaoNotificacao = now; 
+	}
 	
 	public abstract BigDecimal getValor();
 	

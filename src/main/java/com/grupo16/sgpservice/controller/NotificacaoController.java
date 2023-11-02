@@ -1,31 +1,36 @@
 package com.grupo16.sgpservice.controller;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.sgpservice.usecase.NotificacaoUseCase;
 
-@RestController
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequestMapping("notificacoes")
+@RestController
 public class NotificacaoController {
 	
 	@Autowired
 	private NotificacaoUseCase notificacaoUseCase;
 	
-	@GetMapping
-	public void get(
-			@RequestParam(name = "dataInicio") LocalDateTime dataInicio,
-			@RequestParam(name = "dataFim") LocalDateTime dataFim){
+	/*
+	 * ATENÇÃO!
+	 * Se for schedular por sistema externo (ex: AWS Lambda), deve remover a anotação "@Scheduled" 
+	 * 
+	 */
+	@Scheduled(fixedDelay = 5000)
+	@PatchMapping()
+	public void notificar() {
+		log.trace("Start");
 		
-		//FIXME esse controler é temporário, está sendo usado somente para teste do fluxo.
+		notificacaoUseCase.notificar();
 		
-		//notificacaoUseCase.notificar(dataInicio, dataFim);
-		
+		log.trace("End");
 	}
-
+	
 }
