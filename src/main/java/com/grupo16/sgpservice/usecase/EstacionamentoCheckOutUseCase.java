@@ -23,6 +23,7 @@ public class EstacionamentoCheckOutUseCase {
 	public SolicitarPagamentoReturnDto checkOut(String idRegistroEstacionamento) {
 		
 		RegistroEstacionamentoBase rEstacionamento = getEstacionamentoUseCase.getById(idRegistroEstacionamento);
+		rEstacionamento.encerrar();
 		
 		SolicitarPagamentoReturnDto solicitarPagamentoReturnDto = pagamentoGateway.solicitar(rEstacionamento);
 		
