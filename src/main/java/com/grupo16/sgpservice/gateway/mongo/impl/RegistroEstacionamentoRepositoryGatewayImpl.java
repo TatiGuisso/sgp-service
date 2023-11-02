@@ -20,7 +20,6 @@ import com.grupo16.sgpservice.exception.ErroAoAcessarBancoDadosException;
 import com.grupo16.sgpservice.gateway.RegistroEstacionamentoRepositoryGateway;
 import com.grupo16.sgpservice.gateway.mongo.document.RegistroEstacionamentoDocument;
 import com.grupo16.sgpservice.gateway.mongo.document.TabelaPrecoDocument;
-import com.grupo16.sgpservice.gateway.mongo.impl.exception.RegistroEstacionamentoNaoEncontradoException;
 import com.grupo16.sgpservice.gateway.mongo.repository.RegistroEstacionamentoRepository;
 import com.grupo16.sgpservice.gateway.mongo.repository.TabelaPrecoRepository;
 
@@ -87,7 +86,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 						.veiculo(veiculo)
 						.tarifa(tarifa)
 						.build();
-			} else {
+ 			} else {
 				re = RegistroEstacionamentoPeriodoVariavel.builder()
 						.id(id)
 						.dataHoraInicio(reDocument.getDataHoraInicio())
