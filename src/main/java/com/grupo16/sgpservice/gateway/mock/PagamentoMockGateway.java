@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.grupo16.sgpservice.domain.Pagamento;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.StatusPagamento;
+import com.grupo16.sgpservice.dto.SolicitarPagamentoReturnDto;
 import com.grupo16.sgpservice.gateway.PagamentoGateway;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PagamentoMockGateway implements PagamentoGateway {
 
 	@Override
-	public String solicitar(RegistroEstacionamentoBase registroEstacionamento) {
+	public SolicitarPagamentoReturnDto solicitar(RegistroEstacionamentoBase registroEstacionamento) {
 		
 		/*
 		 * Esta classe (adapter) representa um mock de pagamento (fins didáticos). 
@@ -26,7 +27,13 @@ public class PagamentoMockGateway implements PagamentoGateway {
 		
 		log.warn("### MOCK DE PAGAMENTO ###");
 		
-		return UUID.randomUUID().toString();
+		final String solicitacaoPagamentoId = UUID.randomUUID().toString();
+		
+		return SolicitarPagamentoReturnDto.builder()
+				.solicitacaoPagamentoId(solicitacaoPagamentoId)
+				.sistemaPagamentoName("MOCK")
+				.sistemaPagamentoUrl("https://mock/iniciar-pagamento/" + solicitacaoPagamentoId)
+				.build();
 	}
 
 	@Override

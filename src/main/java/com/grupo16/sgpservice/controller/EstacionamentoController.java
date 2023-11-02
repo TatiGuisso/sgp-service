@@ -3,6 +3,7 @@ package com.grupo16.sgpservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.sgpservice.controller.json.EstacionamentoCheckInJson;
+import com.grupo16.sgpservice.controller.json.EstacionamentoCheckOutJson;
 import com.grupo16.sgpservice.controller.json.ReciboJson;
 import com.grupo16.sgpservice.controller.json.RegistroEstacionamentoJson;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
+import com.grupo16.sgpservice.dto.SolicitarPagamentoReturnDto;
 import com.grupo16.sgpservice.usecase.EstacionamentoCheckInUseCase;
+import com.grupo16.sgpservice.usecase.EstacionamentoCheckOutUseCase;
 import com.grupo16.sgpservice.usecase.GetEstacionamentoUseCase;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +35,9 @@ public class EstacionamentoController {
 	@Autowired
 	private GetEstacionamentoUseCase getEstacionamentoUseCase;
 	
+	@Autowired
+	private EstacionamentoCheckOutUseCase estacionamentoCheckOutUseCase;
+	
 	@PostMapping("estacionamentos/check-in")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String checkIn(@RequestBody(required = true) EstacionamentoCheckInJson json) {
@@ -41,6 +48,19 @@ public class EstacionamentoController {
 		log.trace("End ckeckInId={}", ckeckInId);
 		return ckeckInId;
 	}
+	
+	@PatchMapping("estacionamentos/{id}/check-out")
+	public EstacionamentoCheckOutJson checkout(@PathVariable("id") String estacionamentoId) {
+		log.trace("Start estacionamentoId={}", estacionamentoId);
+		
+		final SolicitarPagamentoReturnDto solicitarPagamentoReturnDto = estacionamentoCheckOutUseCase.checkOut(estacionamentoId);
+		
+		EstacionamentoCheckOutJson returnJson = new EstacionamentoCheckOutJson(solicitarPagamentoReturnDto);
+		
+		log.trace("End returnJson={}", returnJson);
+		return returnJson;
+	}
+	
 	
 	@GetMapping("estacionamentos/{id}")
 	public RegistroEstacionamentoJson get(@PathVariable("id") String estacionamentoId) {
