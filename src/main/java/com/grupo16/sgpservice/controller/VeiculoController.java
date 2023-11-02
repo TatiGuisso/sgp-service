@@ -18,6 +18,7 @@ import com.grupo16.sgpservice.usecase.CriarAlterarVeiculoUseCase;
 import com.grupo16.sgpservice.usecase.ObterVeiculoUseCase;
 import com.grupo16.sgpservice.usecase.RemoverVeiculoUseCase;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,6 +38,7 @@ public class VeiculoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public String criar(
+			@Valid
 			@RequestBody(required = true)VeiculoJson veiculoJson) {
 		log.trace("Start condutorJson={}", veiculoJson);
 		

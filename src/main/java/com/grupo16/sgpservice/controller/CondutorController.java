@@ -18,6 +18,7 @@ import com.grupo16.sgpservice.usecase.CriarAlterarCondutorUseCase;
 import com.grupo16.sgpservice.usecase.ObterCondutorUseCase;
 import com.grupo16.sgpservice.usecase.RemoverCondutorUseCase;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,6 +38,7 @@ public class CondutorController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public String criar(
+			@Valid
 			@RequestBody(required = true)CondutorJson condutorJson) {
 		log.trace("Start condutorJson={}", condutorJson);
 		
