@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.sgpservice.controller.json.EstacionamentoCheckInJson;
-import com.grupo16.sgpservice.controller.json.PrecoResponseJson;
 import com.grupo16.sgpservice.controller.json.ReciboJson;
+import com.grupo16.sgpservice.controller.json.RegistroEstacionamentoJson;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.usecase.EstacionamentoCheckInUseCase;
 import com.grupo16.sgpservice.usecase.GetEstacionamentoUseCase;
@@ -43,11 +43,11 @@ public class EstacionamentoController {
 	}
 	
 	@GetMapping("estacionamentos/{id}")
-	public PrecoResponseJson getPrice(@PathVariable("id") String estacionamentoId) {
+	public RegistroEstacionamentoJson get(@PathVariable("id") String estacionamentoId) {
 		log.trace("Start estacionamentoId={}", estacionamentoId);
 		
 		RegistroEstacionamentoBase registroEstacionamento = getEstacionamentoUseCase.getById(estacionamentoId);
-		PrecoResponseJson response = new PrecoResponseJson(registroEstacionamento);
+		RegistroEstacionamentoJson response = new RegistroEstacionamentoJson(registroEstacionamento);
 		
 		log.trace("End response={}", response);
 		return response;
