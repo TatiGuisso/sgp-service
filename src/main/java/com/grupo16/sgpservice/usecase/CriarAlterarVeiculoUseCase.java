@@ -29,7 +29,7 @@ public class CriarAlterarVeiculoUseCase {
 				.marca(veiculo.getMarca())
 				.modelo(veiculo.getModelo())
 				.placa(veiculo.getPlaca())
-				.condutor(veiculo.getCondutor() == null ? null : veiculo.getCondutor())
+				.condutor(veiculoEncontrado.getCondutor())
 				.build();
 
 		veiculoRepositoryGateway.salvar(veiculoSalvar);

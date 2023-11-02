@@ -23,7 +23,7 @@ public class NotificacaoController {
 	 * Se for schedular por sistema externo (ex: AWS Lambda), deve remover a anotação "@Scheduled" 
 	 * 
 	 */
-	@Scheduled(fixedDelay = 5000)
+	@Scheduled(fixedDelay = 10000)
 	@PatchMapping()
 	public void notificar() {
 		log.trace("Start");

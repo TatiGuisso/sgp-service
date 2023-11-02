@@ -144,7 +144,7 @@ curl --location 'http://localhost:8080/condutores/04127674733'
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ### ``PUT``
-`*Para alteração de dados do Usuário Principal`
+`*Para alteração de dados do Condutor`
 
 ```
 	/condutores/{id}
@@ -236,13 +236,16 @@ A funcionalidade de registro de veículos permite que o condutor após o seu cad
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ### ``POST``
+`*Para cadastro de Veículo`
 
-````	veiculos
+```
+	/veiculos
 ```
 <details>
   <summary>Exemplo Request Body:</summary>
 
-````curl --location 'http://localhost:8080/veiculos' \
+```
+curl --location 'http://localhost:8080/veiculos' \
 --header 'Content-Type: application/json' \
 --data '{
     "marca": "VW - VolksWagen",
@@ -252,7 +255,7 @@ A funcionalidade de registro de veículos permite que o condutor após o seu cad
         "id": "6544027c1d769121eb36feb1"
     }
 }'
-````
+```
 </details>
 
 <details>
@@ -261,47 +264,39 @@ A funcionalidade de registro de veículos permite que o condutor após o seu cad
 201 - _Created_
 `- Será retornado o id do veículo`
 
-````65440b88a6a7c64b08bd79b9
-````
-
-400 - _Bad Request_
+```
+65441af928166b3360397af4
+```
+400 - _Bad Request
 
 ```
 {
-  "code": "tc.argumentNotValid",
-  "message": "state:O estado deve estar no formato 'SP';"
-}
-```
-
-500 - _Internal Server Error_
-
-```
-{
-	"code": "tc.endereco.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
+    "code": "argumentNotValid",
+    "message": "placa:não deve estar em branco;"
 }
 ```
 </details>
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ### ``PUT``
+`*Para alteração de dados do Veículo`
+
 
 ```
-	usuarios/{idUsuario}/enderecos/{idEndereco}
+	veiculos/{idVeiculo}
+
 ```
+
 <details>
   <summary>Exemplo Request Body:</summary>
 
 ```
-curl --location --request PUT 'http://localhost:8080/usuarios/28/enderecos/12' \
+curl --location --request PUT 'http://localhost:8080/veiculos/65441af928166b3360397af4' \
 --header 'Content-Type: application/json' \
 --data '{
-    "rua": "Travessa São Pedro",
-    "numero": 200,
-    "bairro": "Bebedouro",
-    "cidade": "Parnaíba",
-    "estado": "PI",
-    "cep": "64895236"
+    "marca": "VW - VolksWagen",
+    "modelo": "Gol Rallye 1.6 T. Flex 16V 5p",
+    "placa": "NEV-1252"
 }'
 ```
 </details>
@@ -318,26 +313,8 @@ curl --location --request PUT 'http://localhost:8080/usuarios/28/enderecos/12' \
 
 ```
 {
-    "code": "tc.endereco.enderecoNaoEcontrado",
-    "message": "Endereço não encontrado."
-}
-```
-
-400 - _Bad Request_
-
-```
-{
-  "code": "tc.argumentNotValid",
-  "message": "state:O estado deve estar no formato 'SP';"
-}
-```
-
-500 - _Internal Server Error_
-
-```
-{
-	"code": "tc.endereco.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
+    "code": "sgp.veiculoNaoEncontrado",
+    "message": "Veiculo não encontrado"
 }
 ```
 </details>
@@ -346,16 +323,14 @@ curl --location --request PUT 'http://localhost:8080/usuarios/28/enderecos/12' \
 
 ### ``GET``
 ```
-usuarios/{idUsuario}/enderecos
+	veiculos/{idVeiculo}
 ```
 <details>
   <summary>Exemplo Request:</summary>
   
 ```
-curl --location 'http://localhost:8080/usuarios/21/enderecos?rua=Travessa&bairro=bebedouro&cidade=parnaiba&estado=PI&cep=64895236'
+curl --location 'http://localhost:8080/veiculos/65441af928166b3360397af4'
 ```
-
-`*Filtros disponíveis:** rua, bairro, cidade, estado, cep.`
 
 </details>
 
@@ -365,37 +340,39 @@ curl --location 'http://localhost:8080/usuarios/21/enderecos?rua=Travessa&bairro
 200 - _OK_
 
 ```
-[
-    {
-        "id": 12,
-        "rua": "Travessa São Pedro",
-        "numero": "200",
-        "bairro": "Bebedouro",
-        "cidade": "Parnaíba",
-        "estado": "PI",
-        "cep": "64895236",
-        "usuario": {
-            "id": 21
+{
+    "id": "65441af928166b3360397af4",
+    "marca": "VW - VolksWagen",
+    "modelo": "Gol Rallye 1.6 T. Flex 16V 5p",
+    "placa": "NEV-1252",
+    "condutor": {
+        "id": "6544027c1d769121eb36feb1",
+        "nome": "Pedro Alves Nunes",
+        "cpf": "04127674733",
+        "email": "pedro_nunes@nunes.com",
+        "telefone": "(98)99764-0567",
+        "endereco": {
+            "rua": "Rua Viana Vaz",
+            "numero": "15",
+            "bairro": "Centro",
+            "cidade": "Timon",
+            "estado": "MA",
+            "cep": "65630-150"
         }
     }
-]
+}
 ```
 
-200 - _OK_
-`- Caso o endereço não exista.`
-
-```
-[]
-```
-
-500 - _Internal Server Error_
+404 - _Not Found_
+`- Caso o veículo não exista.`
 
 ```
 {
-	"code": "tc.endereco.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
+    "code": "sgp.veiculoNaoEncontrado",
+    "message": "Veiculo não encontrado"
 }
 ```
+
 </details>
 
 
@@ -404,14 +381,14 @@ curl --location 'http://localhost:8080/usuarios/21/enderecos?rua=Travessa&bairro
 ### ``DELETE``
 
 ```
-	usuarios/{idUsuario}/enderecos/{idEndereco}
+	veiculos/{idVeiculo}
 ```
 
 <details>
   <summary>Exemplo Request:</summary>
 
 ```
-curl --location --request DELETE 'http://localhost:8080/usuarios/21/enderecos/12'
+curl --location --request DELETE 'http://localhost:8080/veiculos/65440b88a6a7c64b08bd79b9'
 ```
 </details>
 
@@ -423,30 +400,15 @@ curl --location --request DELETE 'http://localhost:8080/usuarios/21/enderecos/12
 ```
 ```
 404 - _Not Found_  
+`- Caso o veículo não exista.`
 
 ```
 {
-    "code": "tc.endereco.enderecoNaoEcontrado",
-    "message": "Endereço não encontrado."
-}
-```
-422 - _Unprocessable Entity_
-
-```
-{
-    "code": "tc.endereco.erroAoExcluirEndereco",
-    "message": "ATENÇÃO: Antes de excluir o endereço, por favor excluir os Eletrodomésticos associados à ele."
+    "code": "sgp.veiculoNaoEncontrado",
+    "message": "Veiculo não encontrado"
 }
 ```
 
-500 - _Internal Server Error_
-
-```
-{
-	"code": "tc.endereco.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
-}
-```
 </details>
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
