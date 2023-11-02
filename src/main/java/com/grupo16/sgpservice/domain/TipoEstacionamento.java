@@ -2,5 +2,5 @@ package com.grupo16.sgpservice.domain;
 
 public enum TipoEstacionamento {
 	TEMPO_FIXO,
-	TEMPO_DINAMICO,
+	TEMPO_VARIAVEL,
 }
