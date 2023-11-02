@@ -10,12 +10,12 @@ import lombok.ToString;
 public class EstacionamentoCheckOutJson {
 	private String solicitacaoPagamentoId;
 	private String sistemaPagamentoName;
-	private String sistemaPagamentoUrl;
+	private String sistemaPagamentoRedirectUrl;
 	
 	public EstacionamentoCheckOutJson(SolicitarPagamentoReturnDto dto) {
 		solicitacaoPagamentoId = dto.getSolicitacaoPagamentoId();
 		sistemaPagamentoName = dto.getSistemaPagamentoName();
-		sistemaPagamentoUrl = dto.getSistemaPagamentoUrl();
+		sistemaPagamentoRedirectUrl = dto.getSistemaPagamentoUrl();
 	}
 
 }
