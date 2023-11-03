@@ -39,7 +39,6 @@ public class NotificacaoUseCase {
 		for (RegistroEstacionamentoBase re : registrosEstacionamento) {
 			re.setDataHoraUltimaNotificacao(now);
 			
-			//FIXME: deixar esse "set" dentro do domain
 			if(re instanceof RegistroEstacionamentoPeriodoVariavel) {
 				re.setDataHoraPrevisaoNotificacao(now.plusMinutes(minutosProximaNotificacao));
 			}
@@ -47,8 +46,9 @@ public class NotificacaoUseCase {
 			notificacoes.add(Notificacao.builder().registroEstacionamento(re).build());
 		}
 		
-		notificacaoRepositoryGateway.notificar(notificacoes);//Ainda não existe. Deve chamar um serviço que irá notificar.
-		
-		estacionamentoRepositoryGateway.salvar(registrosEstacionamento);
+		if(!registrosEstacionamento.isEmpty()) {
+			notificacaoRepositoryGateway.notificar(notificacoes);//Não implementado. Deve chamar um serviço que irá notificar.
+			estacionamentoRepositoryGateway.salvar(registrosEstacionamento);
+		}
 	}
 }

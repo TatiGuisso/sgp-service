@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.grupo16.sgpservice.domain.Condutor;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
+import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
 import com.grupo16.sgpservice.domain.TipoEstacionamento;
 import com.grupo16.sgpservice.domain.Veiculo;
 
@@ -46,7 +47,7 @@ public class RegistroEstacionamentoDocument {
 		dataHoraTermino = domain.getDataHoraTermino();
 		quantidadeHoras = domain instanceof RegistroEstacionamentoPeriodoFixo ? ((RegistroEstacionamentoPeriodoFixo) domain).getQuantidadeHoras() : null;
 		veiculo = VeiculoDocument.builder().id(domain.getVeiculo().getId()).build();
-		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_DINAMICO;
+		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_VARIAVEL;
 		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
 		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
 		pagamento = domain.getPagamento() == null ? null : new PagamentoEntity(domain.getPagamento());
@@ -54,26 +55,23 @@ public class RegistroEstacionamentoDocument {
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {
 		
-		//FIXME retornar o tipo variavel.
+		Condutor condutor = Condutor.builder()
+				.id(veiculo.getCondutor().getId())
+				.nome(veiculo.getCondutor().getNome()) 
+				.cpf(veiculo.getCondutor().getCpf())
+				.email(veiculo.getCondutor().getEmail()) 
+				.telefone(veiculo.getCondutor().getTelefone())
+				.build();
+		
+		Veiculo veiculoDomain = Veiculo.builder()
+				.id(veiculo.getId())
+				.marca(veiculo.getMarca())
+				.modelo(veiculo.getModelo())
+				.placa(veiculo.getPlaca())
+				.condutor(condutor)
+				.build();
 		
 		if(tipo.equals(TipoEstacionamento.TEMPO_FIXO)) {
-			
-			Condutor condutor = Condutor.builder()
-					.id(veiculo.getCondutor().getId())
-					.nome(veiculo.getCondutor().getNome()) 
-			        .cpf(veiculo.getCondutor().getCpf())
-			        .email(veiculo.getCondutor().getEmail()) 
-			        .telefone(veiculo.getCondutor().getTelefone())
-					.build();
-			
-			Veiculo veiculoDomain = Veiculo.builder()
-					.id(veiculo.getId())
-					.marca(veiculo.getMarca())
-					.modelo(veiculo.getModelo())
-					.placa(veiculo.getPlaca())
-					.condutor(condutor)
-					.build();
-			
 			return RegistroEstacionamentoPeriodoFixo.builder()
 					.id(id)
 					.dataHoraInicio(dataHoraInicio)
@@ -82,9 +80,15 @@ public class RegistroEstacionamentoDocument {
 					.veiculo(veiculoDomain)
 					.pagamento(pagamento.getDomain())
 					.build();
+		} else {
+			
+			return RegistroEstacionamentoPeriodoVariavel.builder()
+					.id(id)
+					.dataHoraInicio(dataHoraInicio)
+					.dataHoraTermino(dataHoraTermino)
+					.veiculo(veiculoDomain)
+					.pagamento(pagamento.getDomain())
+					.build();
 		}
-		
-		return null; 
 	}
-	
 }

@@ -18,4 +18,6 @@ public interface RegistroEstacionamentoRepositoryGateway {
 
 	Optional<RegistroEstacionamentoBase> getBySolicitacaoPagamento(String solicitacaoPagamentoId);
 
+	Optional<RegistroEstacionamentoBase> getByIdAndPagamentoStatus(String id, String status);
+
 }

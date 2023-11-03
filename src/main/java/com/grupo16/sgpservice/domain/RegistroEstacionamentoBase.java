@@ -31,17 +31,28 @@ public abstract class RegistroEstacionamentoBase {
 	protected List<Notificacao> notificacoes;
 	protected Veiculo veiculo;
 	protected Recibo recibo;
+	@Setter
 	protected Tarifa tarifa;
 	
 	public void iniciar(Long minutosProximaNotificacao) {
 		dataHoraInicio = LocalDateTime.now();
 		dataHoraPrevisaoNotificacao = dataHoraInicio.plusMinutes(minutosProximaNotificacao); 
 	}
+
+	public void encerrar() {
+		LocalDateTime now = LocalDateTime.now();
+		dataHoraTermino = now;
+		dataHoraPrevisaoNotificacao = now; 
+	}
 	
 	public abstract BigDecimal getValor();
 	
 	public void setStatusPagamento(StatusPagamento statusPagamento) {
 		pagamento.setStatus(statusPagamento);
+	}
+	
+	public void setValorPago() {
+		pagamento.setValorPago(getValor().doubleValue());
 	}
 
 	public void criarSolicitacaoPagamento(String idSolicitacaoPagamento) {

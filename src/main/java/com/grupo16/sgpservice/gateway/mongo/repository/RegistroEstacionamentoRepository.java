@@ -14,6 +14,8 @@ public interface RegistroEstacionamentoRepository extends MongoRepository<Regist
 
 	public Optional<RegistroEstacionamentoDocument> findByPagamentoIdSolicitacaoPagamento(String solicitacaoPagamentoId);
 
+	public Optional<RegistroEstacionamentoDocument> findByIdAndPagamentoStatus(String id, String status);
+
 	
 	
 }

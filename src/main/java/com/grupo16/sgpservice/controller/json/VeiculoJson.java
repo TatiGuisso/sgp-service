@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.Condutor;
 import com.grupo16.sgpservice.domain.Veiculo;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class VeiculoJson {
 	private String id;
 	private String marca;
 	private String modelo;
+	
+	@NotBlank
 	private String placa;
 	private CondutorJson condutor;
 

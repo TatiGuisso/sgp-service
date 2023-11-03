@@ -1,9 +1,13 @@
 package com.grupo16.sgpservice.controller.json;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.Condutor;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,9 +21,18 @@ import lombok.ToString;
 public class CondutorJson {
 
 	private String id;
+	
+	@NotBlank
 	private String nome;
+	
+	@NotNull
+	@CPF
 	private String cpf;
+	
+	@NotBlank
 	private String email;
+	
+	@NotBlank
 	private String telefone;
 	private EnderecoJson endereco;
 

@@ -2,23 +2,23 @@ package com.grupo16.sgpservice.controller.json;
 
 import com.grupo16.sgpservice.domain.Pagamento;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-@AllArgsConstructor
-@Builder
-@Getter
 @ToString
-public class PagamentoResponseJson {
+@Getter
+public class PagamentoJson {
 	private String idSolicitacaoPagamento;
+	private String sistemaPagamento;
 	private String status;
 	private Double valorPago;
-	
-	public PagamentoResponseJson(Pagamento pagamento) {
+
+	public PagamentoJson(Pagamento pagamento) {
 		idSolicitacaoPagamento = pagamento.getIdSolicitacaoPagamento();
-		status = pagamento.getStatus().toString();
+		sistemaPagamento = pagamento.getSistemaPagamento();
+		status = pagamento.getStatus().name();
 		valorPago = pagamento.getValorPago();
 	}
+
+	
 }

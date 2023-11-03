@@ -2,6 +2,7 @@ package com.grupo16.sgpservice.domain;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.Builder;
 import lombok.ToString;
@@ -14,7 +15,14 @@ public class Tarifa {
 	private List<Preco> tabelaHoraPreco;
 	
 	public BigDecimal getPrecoHoraTabelada(Long hora) {
-		return tabelaHoraPreco.stream().filter(p -> p.getHora().equals(hora)).findAny().get().getValor();
+		Optional<Preco> precoOp = tabelaHoraPreco.stream().filter(p -> p.getHora().equals(hora)).findAny();
+		
+		if(precoOp.isPresent()) {
+			return precoOp.get().getValor();
+		}
+		
+		//Se não tiver o a hora na tabela, então considera a de maior valor.
+		return tabelaHoraPreco.get(tabelaHoraPreco.size()-1).getValor();
 	}
 			
 	public BigDecimal getValorPelaQuantidadeHoras(Long quantidadeHora) {

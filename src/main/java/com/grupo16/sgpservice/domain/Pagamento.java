@@ -14,4 +14,7 @@ public class Pagamento {
 	
 	@Setter
 	private StatusPagamento status;
+	
+	@Setter	
+	private Double valorPago;
 }
