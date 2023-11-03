@@ -2,13 +2,20 @@
 
 # Introdução
 
-O SGP-Sistema de Gestão de Parquimetro, foi desenvolvido para atender a crescente demanda de estacionamento na cidade.
+O Sistema de Gestão de Parquímetro (SGP) simplifica o processo de registro dos condutores, os quais fornecem seus dados pessoais e informações sobre seus veículos. 
+Ao realizar o check-in no estacionamento, os condutores têm a opção de escolher entre dois tipos de cobrança, adaptando-se às suas necessidades:
+
+1 - **Tempo Fixo:** Neste modelo, o estabelecimento determina um valor para um período específico, por exemplo, 4 horas por R$15,00. 
+	Independentemente do tempo real utilizado, o valor total correspondente ao período selecionado será cobrado.
+
+2 - **Tempo Variável:** Aqui, a cobrança é feita por hora completa, por exemplo, R$5,00 por hora. 
+	É importante notar que o valor não é fracionado caso o condutor não utilize uma hora completa.
 
 ## Sumário
 * [Instruções](#instruções)
-* [API Usuário](#api-usuário)
-* [API Endereço](#api-endereço)
-* [API Eletrodoméstico](#api-eletrodoméstico)
+* [Registro de Condutores](#registro-de-condutores)
+* [Registro de Veículo](#registro-de-veículo)
+* [Registro de Estacionamento](#registro-de-estacionamento)
 * [Tecnologias](#tecnologias)
 * [Desafios](#desafios)
 
