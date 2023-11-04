@@ -5,11 +5,16 @@
 O Sistema de Gestão de Parquímetro (SGP) simplifica o processo de registro dos condutores, os quais fornecem seus dados pessoais e informações sobre seus veículos. 
 Ao realizar o check-in no estacionamento, os condutores têm a opção de escolher entre dois tipos de cobrança, adaptando-se às suas necessidades:
 
-1 - **Tempo Fixo:** Neste modelo, o estabelecimento determina um valor para um período específico, por exemplo, 4 horas por R$15,00. 
-	Independentemente do tempo real utilizado, o valor total correspondente ao período selecionado será cobrado.
+1 - **Tempo Fixo:** Neste modelo, o estabelecimento determina um valor para um período específico, por exemplo, 4 horas por R$15,00. <br/> Independentemente do tempo real utilizado, o valor total correspondente ao período selecionado será cobrado.
 
-2 - **Tempo Variável:** Aqui, a cobrança é feita por hora completa, por exemplo, R$5,00 por hora. 
-	É importante notar que o valor não é fracionado caso o condutor não utilize uma hora completa.
+2 - **Tempo Variável:** Aqui, a cobrança é feita por hora completa, por exemplo, R$5,00 por hora. <br/>	É importante notar que o valor não é fracionado caso o condutor não utilize uma hora completa.
+
+Independente da opção de cobrança selecionada, o sistema oferece uma funcionalidade de Notificação, alertando os condutores quando o tempo está prestes a expirar.
+
+Para o método de Tempo Fixo, a notificação é enviada 10 minutos antes do término do período estipulado.
+
+No caso do Tempo Variável, são enviadas notificações 10 minutos antes de completar 1 hora de estacionamento. Este alerta informa o condutor que o sistema estenderá automaticamente o estacionamento por mais 1 hora, oferecendo praticidade e assegurando que o veículo permaneça estacionado sem interrupções.
+
 
 ## Sumário
 * [Instruções](#instruções)
