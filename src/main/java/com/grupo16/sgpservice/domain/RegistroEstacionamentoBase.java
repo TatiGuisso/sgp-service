@@ -26,6 +26,7 @@ public abstract class RegistroEstacionamentoBase {
 	@Setter
 	protected LocalDateTime dataHoraUltimaNotificacao;
 	
+	@Setter
 	protected Boolean deveNotificar;
 	
 	protected List<Notificacao> notificacoes;
@@ -36,8 +37,7 @@ public abstract class RegistroEstacionamentoBase {
 	
 	public void iniciar(Long minutosProximaNotificacao) {
 		dataHoraInicio = LocalDateTime.now();
-//		dataHoraPrevisaoNotificacao = dataHoraInicio.plusMinutes(minutosProximaNotificacao); 
-		dataHoraPrevisaoNotificacao = dataHoraInicio.plusHours(1); 
+		dataHoraPrevisaoNotificacao = dataHoraInicio.plusHours(1).minusMinutes(minutosProximaNotificacao); 
 	}
 
 	public void encerrar() {

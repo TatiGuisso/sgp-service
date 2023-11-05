@@ -1,6 +1,5 @@
 package com.grupo16.sgpservice.gateway.mongo.impl;
 
-import java.net.http.HttpClient.Redirect;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -93,6 +92,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 						.veiculo(veiculo)
 						.tarifa(tarifa)
 						.pagamento(pagamento)
+						.deveNotificar(reDocument.getDeveNotificar())
 						.build();
  			} else {
 				re = RegistroEstacionamentoPeriodoVariavel.builder()
@@ -102,6 +102,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 						.veiculo(veiculo)
 						.tarifa(tarifa)
 						.pagamento(pagamento)
+						.deveNotificar(reDocument.getDeveNotificar())
 						.build();
 			}
 			

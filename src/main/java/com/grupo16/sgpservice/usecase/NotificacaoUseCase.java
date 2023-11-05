@@ -14,6 +14,9 @@ import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
 import com.grupo16.sgpservice.gateway.NotificacaoRepositoryGateway;
 import com.grupo16.sgpservice.gateway.RegistroEstacionamentoRepositoryGateway;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class NotificacaoUseCase {
 
@@ -32,6 +35,8 @@ public class NotificacaoUseCase {
 		final LocalDateTime dataHoraFiltroInicio = now.minusMinutes(10);
 		final LocalDateTime dataHoraFiltroFim = now.plusMinutes(10);
 		
+		log.info("rangeInicio={}, rangeFim={}",dataHoraFiltroInicio,dataHoraFiltroFim);
+		
 		List<RegistroEstacionamentoBase> registrosEstacionamento =  estacionamentoRepositoryGateway.getByDataHoraPrevisaoNotificacaoBetween(dataHoraFiltroInicio, dataHoraFiltroFim);
 		
 		List<Notificacao> notificacoes = new ArrayList<>();
@@ -40,7 +45,9 @@ public class NotificacaoUseCase {
 			re.setDataHoraUltimaNotificacao(now);
 			
 			if(re instanceof RegistroEstacionamentoPeriodoVariavel) {
-				re.setDataHoraPrevisaoNotificacao(now.plusMinutes(minutosProximaNotificacao));
+				re.setDataHoraPrevisaoNotificacao(re.getDataHoraPrevisaoNotificacao().plusHours(1));
+			} else {
+				re.setDeveNotificar(false);
 			}
 			
 			notificacoes.add(Notificacao.builder().registroEstacionamento(re).build());

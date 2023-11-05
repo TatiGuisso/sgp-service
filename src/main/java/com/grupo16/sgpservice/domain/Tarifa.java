@@ -26,6 +26,9 @@ public class Tarifa {
 	}
 			
 	public BigDecimal getValorPelaQuantidadeHoras(Long quantidadeHora) {
+		if(quantidadeHora == 0L) {
+			quantidadeHora = 1L;
+		}
 		return new BigDecimal(quantidadeHora).multiply(valorUnitario);
 	}
 	

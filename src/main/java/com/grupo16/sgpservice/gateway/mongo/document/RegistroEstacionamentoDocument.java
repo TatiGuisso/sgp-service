@@ -6,7 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.grupo16.sgpservice.domain.Condutor;
+import com.grupo16.sgpservice.domain.Pagamento;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
@@ -37,6 +39,8 @@ public class RegistroEstacionamentoDocument {
 	private Long quantidadeHoras;
 	protected PagamentoEntity pagamento;
 	
+	private Boolean deveNotificar;
+	
 	@DBRef
 	private VeiculoDocument veiculo;
 	private TipoEstacionamento tipo;
@@ -51,6 +55,7 @@ public class RegistroEstacionamentoDocument {
 		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
 		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
 		pagamento = domain.getPagamento() == null ? null : new PagamentoEntity(domain.getPagamento());
+		deveNotificar = domain.getDeveNotificar();
 	}
 	
 	public RegistroEstacionamentoBase parseRegistroDomain() {
@@ -78,7 +83,11 @@ public class RegistroEstacionamentoDocument {
 					.dataHoraTermino(dataHoraTermino)
 					.quantidadeHoras(quantidadeHoras)
 					.veiculo(veiculoDomain)
-					.pagamento(pagamento.getDomain())
+					.pagamento(pagamento == null ? null : Pagamento.builder()
+							.idSolicitacaoPagamento(this.pagamento.getIdSolicitacaoPagamento())
+							.status(this.pagamento.getStatus())
+							.build())
+					.deveNotificar(deveNotificar)
 					.build();
 		} else {
 			
@@ -87,7 +96,11 @@ public class RegistroEstacionamentoDocument {
 					.dataHoraInicio(dataHoraInicio)
 					.dataHoraTermino(dataHoraTermino)
 					.veiculo(veiculoDomain)
-					.pagamento(pagamento.getDomain())
+					.pagamento(pagamento == null ? null : Pagamento.builder()
+							.idSolicitacaoPagamento(this.pagamento.getIdSolicitacaoPagamento())
+							.status(this.pagamento.getStatus())
+							.build())
+					.deveNotificar(deveNotificar)
 					.build();
 		}
 	}

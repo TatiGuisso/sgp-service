@@ -36,6 +36,6 @@ public class RegistroEstacionamentoPeriodoFixo extends RegistroEstacionamentoBas
 	public void iniciar(Long minutosProximaNotificacao) {
 		dataHoraInicio = LocalDateTime.now();
 		super.dataHoraTermino = dataHoraInicio.plusHours(quantidadeHoras);
-		super.dataHoraPrevisaoNotificacao = LocalDateTime.from(dataHoraTermino);
+		super.dataHoraPrevisaoNotificacao = LocalDateTime.from(dataHoraTermino).minusMinutes(minutosProximaNotificacao);
 	}
 }
