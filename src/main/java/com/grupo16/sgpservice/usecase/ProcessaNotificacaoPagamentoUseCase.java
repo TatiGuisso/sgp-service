@@ -52,6 +52,7 @@ public class ProcessaNotificacaoPagamentoUseCase {
 		rEstacionamento.setStatusPagamento(pagamento.getStatus());
 		rEstacionamento.setTarifa(tarifa);
 		rEstacionamento.setValorPago();
+		rEstacionamento.setDeveNotificar(false);
 		
 		registroEstacionamentoRepositoryGateway.salvar(rEstacionamento);
 	}
