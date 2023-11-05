@@ -87,6 +87,7 @@ public class RegistroEstacionamentoDocument {
 					.pagamento(pagamento == null ? null : Pagamento.builder()
 							.idSolicitacaoPagamento(this.pagamento.getIdSolicitacaoPagamento())
 							.status(this.pagamento.getStatus())
+							.valorPago(this.pagamento.getValorPago() == null ? null : this.pagamento.getValorPago())
 							.build())
 					.deveNotificar(deveNotificar)
 					.build();
@@ -101,6 +102,7 @@ public class RegistroEstacionamentoDocument {
 					.pagamento(pagamento == null ? null : Pagamento.builder()
 							.idSolicitacaoPagamento(this.pagamento.getIdSolicitacaoPagamento())
 							.status(this.pagamento.getStatus())
+							.valorPago(this.pagamento.getValorPago() == null ? null : this.pagamento.getValorPago())
 							.build())
 					.deveNotificar(deveNotificar)
 					.build();
