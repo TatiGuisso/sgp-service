@@ -7,6 +7,7 @@ O Sistema de Gestão de Parquímetro (SGP) foi desenvolvido para atender à cres
 
 ## Sumário
 * [Instruções](#instruções)
+* [Serverless](#serverless)
 * [Registro de Condutores](#registro-de-condutores)
 * [Registro de Veículo](#registro-de-veículo)
 * [Registro de Estacionamento](#registro-de-estacionamento)
@@ -19,7 +20,17 @@ O Sistema de Gestão de Parquímetro (SGP) foi desenvolvido para atender à cres
 ## Instruções
 
 - Maven: Para build do projeto. **Para buildar:** mvn clean install
-- Foi utilizado Lombok e Validation, portanto é necessário adicionar os plugins na IDE
+- Foi utilizado Lombok, Validation e MongoDB, portanto é necessário adicionar os plugins na IDE
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
+
+---------
+<a name="serverless"></a>
+## ☁️ Serverless
+
+A solução foi construída utilizando os serviços da AWS, onde tudo está dockerizado em serviços Fargate com um cluster ECS e todo tráfico sendo gerenciado por um Network Load Balancer interligado ao API Gateway. Confira tudo isso, assim como o passo a passo das configurações aqui no link abaixo:
+
+> https://github.com/TatiGuisso/sgp-service/blob/develop/AWS/deploy-aws.pdf
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
@@ -764,6 +775,7 @@ Na versão atual do sistema, o administrador do estabelecimento insere manualmen
 - Boas práticas da Linguagem/Framework
 - Clean architecture
 - Banco de Dados MongoDB
+- Serviços em nuvem (AWS)
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
