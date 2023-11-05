@@ -1,5 +1,9 @@
 package com.grupo16.sgpservice.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +22,7 @@ import com.grupo16.sgpservice.controller.json.ReciboJson;
 import com.grupo16.sgpservice.controller.json.RegistroEstacionamentoJson;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.dto.SolicitarPagamentoReturnDto;
+import com.grupo16.sgpservice.gateway.RegistroEstacionamentoRepositoryGateway;
 import com.grupo16.sgpservice.usecase.EstacionamentoCheckInUseCase;
 import com.grupo16.sgpservice.usecase.EstacionamentoCheckOutUseCase;
 import com.grupo16.sgpservice.usecase.GetEstacionamentoUseCase;
@@ -85,4 +90,5 @@ public class EstacionamentoController {
 		log.trace("End response={}", reciboJson);
 		return reciboJson;
 	}
+	
 }

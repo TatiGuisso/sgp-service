@@ -14,7 +14,8 @@ public interface RegistroEstacionamentoRepositoryGateway {
 
 	RegistroEstacionamentoBase getById(String id);
 	
-	List<RegistroEstacionamentoBase> getByDataHoraPrevisaoNotificacaoBetween(LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino);
+	List<RegistroEstacionamentoBase> getByDeveNotificarAndDataHoraPrevisaoNotificacaoBetween(
+			Boolean notifica, LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino);
 
 	Optional<RegistroEstacionamentoBase> getBySolicitacaoPagamento(String solicitacaoPagamentoId);
 

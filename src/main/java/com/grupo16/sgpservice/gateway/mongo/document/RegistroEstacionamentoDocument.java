@@ -47,13 +47,13 @@ public class RegistroEstacionamentoDocument {
 	
 	public RegistroEstacionamentoDocument(RegistroEstacionamentoBase domain) {
 		id = domain.getId();
-		dataHoraInicio = domain.getDataHoraInicio();
-		dataHoraTermino = domain.getDataHoraTermino();
+		dataHoraInicio = domain.getDataHoraInicio().minusHours(3);//reduzindo 3 horas para se adequar ao fuso horario Brasil
+		dataHoraTermino = domain.getDataHoraTermino() == null ? null : domain.getDataHoraTermino().minusHours(3);//reduzindo 3 horas para se adequar ao fuso horario Brasil
 		quantidadeHoras = domain instanceof RegistroEstacionamentoPeriodoFixo ? ((RegistroEstacionamentoPeriodoFixo) domain).getQuantidadeHoras() : null;
 		veiculo = VeiculoDocument.builder().id(domain.getVeiculo().getId()).build();
 		tipo = domain instanceof RegistroEstacionamentoPeriodoFixo ? TipoEstacionamento.TEMPO_FIXO : TipoEstacionamento.TEMPO_VARIAVEL;
-		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao();
-		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao();
+		dataHoraUltimaNotificacao = domain.getDataHoraUltimaNotificacao() == null ? null : domain.getDataHoraUltimaNotificacao().minusHours(3);
+		dataHoraPrevisaoNotificacao = domain.getDataHoraPrevisaoNotificacao().minusHours(3);
 		pagamento = domain.getPagamento() == null ? null : new PagamentoEntity(domain.getPagamento());
 		deveNotificar = domain.getDeveNotificar();
 	}
@@ -79,9 +79,10 @@ public class RegistroEstacionamentoDocument {
 		if(tipo.equals(TipoEstacionamento.TEMPO_FIXO)) {
 			return RegistroEstacionamentoPeriodoFixo.builder()
 					.id(id)
-					.dataHoraInicio(dataHoraInicio)
-					.dataHoraTermino(dataHoraTermino)
+					.dataHoraInicio(dataHoraInicio.plusHours(3))
+					.dataHoraTermino(dataHoraTermino.plusHours(3))
 					.quantidadeHoras(quantidadeHoras)
+					.dataHoraPrevisaoNotificacao(dataHoraPrevisaoNotificacao == null ? null : dataHoraPrevisaoNotificacao.plusHours(3))
 					.veiculo(veiculoDomain)
 					.pagamento(pagamento == null ? null : Pagamento.builder()
 							.idSolicitacaoPagamento(this.pagamento.getIdSolicitacaoPagamento())
@@ -93,8 +94,9 @@ public class RegistroEstacionamentoDocument {
 			
 			return RegistroEstacionamentoPeriodoVariavel.builder()
 					.id(id)
-					.dataHoraInicio(dataHoraInicio)
-					.dataHoraTermino(dataHoraTermino)
+					.dataHoraInicio(dataHoraInicio.plusHours(3))
+					.dataHoraTermino(dataHoraTermino == null ? null : dataHoraTermino.plusHours(3))
+					.dataHoraPrevisaoNotificacao(dataHoraPrevisaoNotificacao == null ? null : dataHoraPrevisaoNotificacao.plusHours(3))
 					.veiculo(veiculoDomain)
 					.pagamento(pagamento == null ? null : Pagamento.builder()
 							.idSolicitacaoPagamento(this.pagamento.getIdSolicitacaoPagamento())

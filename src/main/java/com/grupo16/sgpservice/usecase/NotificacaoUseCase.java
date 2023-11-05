@@ -37,7 +37,8 @@ public class NotificacaoUseCase {
 		
 		log.info("rangeInicio={}, rangeFim={}",dataHoraFiltroInicio,dataHoraFiltroFim);
 		
-		List<RegistroEstacionamentoBase> registrosEstacionamento =  estacionamentoRepositoryGateway.getByDataHoraPrevisaoNotificacaoBetween(dataHoraFiltroInicio, dataHoraFiltroFim);
+		List<RegistroEstacionamentoBase> registrosEstacionamento =  
+				estacionamentoRepositoryGateway.getByDeveNotificarAndDataHoraPrevisaoNotificacaoBetween(true, dataHoraFiltroInicio, dataHoraFiltroFim);
 		
 		List<Notificacao> notificacoes = new ArrayList<>();
 		

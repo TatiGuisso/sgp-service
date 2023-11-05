@@ -10,7 +10,8 @@ import com.grupo16.sgpservice.gateway.mongo.document.RegistroEstacionamentoDocum
 
 public interface RegistroEstacionamentoRepository extends MongoRepository<RegistroEstacionamentoDocument, String>{
 	
-	public List<RegistroEstacionamentoDocument> findByDataHoraTerminoBetween(LocalDateTime dataHoraIncio, LocalDateTime dataHoraTermino);
+	public List<RegistroEstacionamentoDocument> findByDeveNotificarAndDataHoraPrevisaoNotificacaoBetween(
+			Boolean notifica, LocalDateTime dataHoraIncio, LocalDateTime dataHoraTermino);
 
 	public Optional<RegistroEstacionamentoDocument> findByPagamentoIdSolicitacaoPagamento(String solicitacaoPagamentoId);
 

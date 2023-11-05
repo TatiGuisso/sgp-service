@@ -32,12 +32,14 @@ public class EstacionamentoCheckInJson {
 				.id(id)
 				.quantidadeHoras(quantidadeHoras)
 				.veiculo(veiculo)
+				.deveNotificar(true)
 			.build();
 			
 		} else {
 			registroEstacionamento = RegistroEstacionamentoPeriodoVariavel.builder()
 					.id(id)
 					.veiculo(veiculo)
+					.deveNotificar(true)
 					.build();
 		}
 		

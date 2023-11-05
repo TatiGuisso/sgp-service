@@ -86,8 +86,8 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 			if(TipoEstacionamento.TEMPO_FIXO.equals(reDocument.getTipo())) {
 				re = RegistroEstacionamentoPeriodoFixo.builder()
 						.id(id)
-						.dataHoraInicio(reDocument.getDataHoraInicio())
-						.dataHoraTermino(reDocument.getDataHoraTermino())
+						.dataHoraInicio(reDocument.getDataHoraInicio().plusHours(3))
+						.dataHoraTermino(reDocument.getDataHoraTermino().plusHours(3))
 						.quantidadeHoras(reDocument.getQuantidadeHoras())
 						.veiculo(veiculo)
 						.tarifa(tarifa)
@@ -97,7 +97,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
  			} else {
 				re = RegistroEstacionamentoPeriodoVariavel.builder()
 						.id(id)
-						.dataHoraInicio(reDocument.getDataHoraInicio())
+						.dataHoraInicio(reDocument.getDataHoraInicio().plusHours(3))
 						.dataHoraTermino(reDocument.getDataHoraTermino())
 						.veiculo(veiculo)
 						.tarifa(tarifa)
@@ -136,11 +136,13 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 	}
 
 	@Override
-	public List<RegistroEstacionamentoBase> getByDataHoraPrevisaoNotificacaoBetween(
-			LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino) {
+	public List<RegistroEstacionamentoBase> getByDeveNotificarAndDataHoraPrevisaoNotificacaoBetween(
+			Boolean notifica, LocalDateTime dataHoraInicio, LocalDateTime dataHoraTermino) {
 		
 		try {
-			List<RegistroEstacionamentoDocument> registrosDocument = registroEstacionamentoRepository.findByDataHoraTerminoBetween(dataHoraInicio, dataHoraTermino);
+			List<RegistroEstacionamentoDocument> registrosDocument = 
+					registroEstacionamentoRepository.findByDeveNotificarAndDataHoraPrevisaoNotificacaoBetween(
+							notifica, dataHoraInicio.minusHours(3), dataHoraTermino.minusHours(3));//reduzindo 3 horas para se adequar ao fuso horario Brasil
 			
 			List<RegistroEstacionamentoBase> registros = registrosDocument.stream().map(re -> re.parseRegistroDomain()).toList();
 			
