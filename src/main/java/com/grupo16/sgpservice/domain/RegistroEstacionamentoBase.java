@@ -36,7 +36,8 @@ public abstract class RegistroEstacionamentoBase {
 	
 	public void iniciar(Long minutosProximaNotificacao) {
 		dataHoraInicio = LocalDateTime.now();
-		dataHoraPrevisaoNotificacao = dataHoraInicio.plusMinutes(minutosProximaNotificacao); 
+//		dataHoraPrevisaoNotificacao = dataHoraInicio.plusMinutes(minutosProximaNotificacao); 
+		dataHoraPrevisaoNotificacao = dataHoraInicio.plusHours(1); 
 	}
 
 	public void encerrar() {

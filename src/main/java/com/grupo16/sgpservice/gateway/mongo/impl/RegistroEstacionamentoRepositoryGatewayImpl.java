@@ -1,5 +1,6 @@
 package com.grupo16.sgpservice.gateway.mongo.impl;
 
+import java.net.http.HttpClient.Redirect;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo16.sgpservice.domain.Condutor;
+import com.grupo16.sgpservice.domain.Pagamento;
 import com.grupo16.sgpservice.domain.Preco;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
@@ -77,6 +79,11 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 					.condutor(condutor)
 					.build();
 			
+			Pagamento pagamento = reDocument.getPagamento() == null ? null : Pagamento.builder()
+					.idSolicitacaoPagamento(reDocument.getPagamento().getIdSolicitacaoPagamento())
+					.status(reDocument.getPagamento().getStatus())
+					.build(); 
+			
 			if(TipoEstacionamento.TEMPO_FIXO.equals(reDocument.getTipo())) {
 				re = RegistroEstacionamentoPeriodoFixo.builder()
 						.id(id)
@@ -85,6 +92,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 						.quantidadeHoras(reDocument.getQuantidadeHoras())
 						.veiculo(veiculo)
 						.tarifa(tarifa)
+						.pagamento(pagamento)
 						.build();
  			} else {
 				re = RegistroEstacionamentoPeriodoVariavel.builder()
@@ -93,6 +101,7 @@ public class RegistroEstacionamentoRepositoryGatewayImpl implements RegistroEsta
 						.dataHoraTermino(reDocument.getDataHoraTermino())
 						.veiculo(veiculo)
 						.tarifa(tarifa)
+						.pagamento(pagamento)
 						.build();
 			}
 			

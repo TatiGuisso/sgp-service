@@ -2,18 +2,7 @@
 
 # Introdução
 
-O Sistema de Gestão de Parquímetro (SGP) simplifica o processo de registro dos condutores, os quais fornecem seus dados pessoais e informações sobre seus veículos. 
-Ao realizar o check-in no estacionamento, os condutores têm a opção de escolher entre dois tipos de cobrança, adaptando-se às suas necessidades:
-
-1 - **Tempo Fixo:** Neste modelo, o estabelecimento determina um valor para um período específico, por exemplo, 4 horas por R$15,00. <br/> Independentemente do tempo real utilizado, o valor total correspondente ao período selecionado será cobrado.
-
-2 - **Tempo Variável:** Aqui, a cobrança é feita por hora completa, por exemplo, R$5,00 por hora. <br/>	É importante notar que o valor não é fracionado caso o condutor não utilize uma hora completa.
-
-Independente da opção de cobrança selecionada, o sistema oferece uma funcionalidade de Notificação, alertando os condutores quando o tempo está prestes a expirar.
-
-Para o método de Tempo Fixo, a notificação é enviada 10 minutos antes do término do período estipulado.
-
-No caso do Tempo Variável, são enviadas notificações 10 minutos antes de completar 1 hora de estacionamento. Este alerta informa o condutor que o sistema estenderá automaticamente o estacionamento por mais 1 hora, oferecendo praticidade e assegurando que o veículo permaneça estacionado sem interrupções.
+O Sistema de Gestão de Parquímetro (SGP) foi desenvolvido para atender à crescente demanda por estacionamento na cidade. Com funcionalidades que incluem o registro de condutores e veículos, controle do tempo de estacionamento, opções flexíveis de pagamento e a emissão de recibos, oferece uma solução abrangente e eficiente para as necessidades de estacionamento na região.
 
 
 ## Sumário
@@ -21,6 +10,8 @@ No caso do Tempo Variável, são enviadas notificações 10 minutos antes de com
 * [Registro de Condutores](#registro-de-condutores)
 * [Registro de Veículo](#registro-de-veículo)
 * [Registro de Estacionamento](#registro-de-estacionamento)
+* [Notificação](#notificação)
+* [Tarifa](#tarifa)
 * [Tecnologias](#tecnologias)
 * [Desafios](#desafios)
 
@@ -244,7 +235,7 @@ curl --location --request DELETE 'http://localhost:8080/condutores/654404c222882
 >[ Base URL: http://localhost:8080 ]
 
 
-A funcionalidade de registro de veículos permite que o condutor após o seu cadastro, inclua informações sobre seu(s) veículo(s). Essa etapa possibilita inclusão de detalhes de um ou vários veículos que o condutor possua ou opere.o
+A funcionalidade de registro de veículos permite que o condutor após o seu cadastro, inclua informações sobre seu(s) veículo(s). Essa etapa possibilita inclusão de detalhes de um ou vários veículos que o condutor possua ou opere.
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
@@ -318,8 +309,10 @@ curl --location --request PUT 'http://localhost:8080/veiculos/65441af928166b3360
   <summary>Exemplo Responses:</summary>
 
 204 - _No Content_
+
 ```
 ```
+
 404 - _Not Found_  
 
 ```
@@ -429,13 +422,30 @@ curl --location --request DELETE 'http://localhost:8080/veiculos/65440b88a6a7c64
 
 >[ Base URL: http://localhost:8080 ]
 
-//TODO descrever sobre o registro de estacionamento.
+Ao realizar o check-in no estacionamento, os condutores têm a opção de escolher entre dois tipos de cobrança, adaptando-se às suas necessidades:
+
+1 - **Tempo Fixo:** Neste modelo, o estabelecimento determina um valor para um período específico, por exemplo, 4 horas por R$15,00. <br/> Independentemente do tempo real utilizado, o valor total correspondente ao período selecionado será cobrado.
+
+2 - **Tempo Variável:** Aqui, a cobrança é feita por hora completa, por exemplo, R$5,00 por hora. <br/>	É importante notar que o valor não é fracionado caso o condutor não utilize uma hora completa.
+
+Quando o condutor realiza o check-out, o SGP (Sistema de Gestão de Parquímetro) inicia o procedimento de pagamento enviando uma solicitação para um sistema de pagamento externo, como o Mercado Pago, por exemplo. O Mercado Pago responde ao SGP com um ID de solicitação de pagamento, o qual é armazenado no banco de dados.
+
+Neste momento, a tela de check-out redireciona o usuário para a interface do Mercado Pago, permitindo que ele efetue o pagamento. O condutor pode escolher a forma de pagamento que melhor lhe convier: cartão de crédito, cartão de débito ou PIX. <br/>
+Enquanto o Mercado Pago processa o pagamento, o condutor visualiza a tela de "processando pagamento", aguardando a conclusão da transação.
+
+Durante esse processo, o frontend realiza automaticamente requisições ao SGP, enviando o ID do Registro de Estacionamento a intervalos regulares. Isso continua enquanto o status da transação estiver marcado como "Aguardando Pagamento", ou até serem feitas um número específico de tentativas. O condutor não precisa executar essa etapa, continuando a visualizar a tela de "processando pagamento".
+
+Assim que o Mercado Pago confirma o sucesso da transação, envia essa confirmação para o SGP por meio de um endpoint **(Webhook)**, marcando o status como "PAGO". O SGP então atualiza o banco de dados com o status e o valor pago.
+
+Após essa etapa, o sistema atualiza o status no frontend e direciona o condutor para uma tela de Sucesso ou Erro, dependendo do desfecho da transação.
+
+Se o pagamento for bem-sucedido, o condutor terá a opção de solicitar um recibo correspondente ao pagamento do estacionamento.
 
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ### ``POST``
-`*Para iniciar o registro de estacionamento (check-in)`
+`*Para iniciar o registro de estacionamento (CHECK-IN)`
 
 ```
 	estacionamentos/check-in
@@ -474,18 +484,11 @@ curl --location 'http://localhost:8080/estacionamentos/check-in' \
 201 - _Created_
 `- Será retornado o id do registro estacionamento`
 
-- _Cobrança por TEMPO_FIXO_
+- _Cobrança por TEMPO_FIXO  ou  TEMPO_VARIAVEL_
 
 ```
 6544269962cd7f53cfcbb87e
 ```
-
-- _Cobrança por TEMPO_VARIAVEL_
-
-```
-65442ec5e691fb37293402e5
-```
-
 
 </details>
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
@@ -561,7 +564,7 @@ curl --location 'http://localhost:8080/estacionamentos/6544269962cd7f53cfcbb87e'
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ### ``PATCH``
-`*Para encerrar o registro de estacionamento (check-out)`
+`*Para encerrar o registro de estacionamento (CHECK-OUT)`
 
 ```
 	estacionamentos/{id}/check-out
@@ -596,7 +599,7 @@ curl --location --request PATCH 'http://localhost:8080/estacionamentos/654426996
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ### ``GET``
-`*Para obter o recibo após concluir o pagamento`
+`*Para obter o RECIBO após concluir o pagamento`
 
 ```
 	estacionamentos/{id}/recibo
@@ -673,13 +676,88 @@ curl --location 'http://localhost:8080/estacionamentos/6544269962cd7f53cfcbb87e/
 </details>
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
+---------
+### Notificação
+
+>[ Base URL: http://localhost:8080 ]
+
+Indiferentemente da opção de cobrança selecionada, o sistema oferece uma funcionalidade de Notificação, alertando os condutores quando o tempo está prestes a expirar.
+
+Para o método de Tempo Fixo, a notificação é enviada 10 minutos antes do término do período estipulado.
+
+No caso do Tempo Variável, são enviadas notificações 10 minutos antes de completar 1 hora de estacionamento. Este alerta informa o condutor que o sistema estenderá automaticamente o estacionamento por mais 1 hora, oferecendo praticidade e assegurando que o veículo permaneça estacionado sem interrupções.
+
+Atualmente, a funcionalidade de notificação está agendada pelo Spring, verificando a cada 10 segundos se há algum registro de estacionamento prestes a vencer (ou seja, 10 minutos antes do término). 
+
+É importante ressaltar que, nesta versão, ainda não contamos com uma implementação à chamada de um serviço específico para o envio de e-mails e mensagens de texto (SMS).
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
+
+### ``PATCH``  
+`*Para notificações`
+
+```
+	/notificacoes
+```
+<details>
+  <summary>Exemplo Request:</summary>
+
+```
+curl --location --request PATCH 'http://localhost:8080/notificacoes'
+```
+</details>
+
+<details>
+  <summary>Exemplo Responses:</summary>
+
+204 - _No Content_
+
+```
+```
+
+</details>
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ---------
+### Tarifa
 
+> TabelaPrecoDocument
+
+Na versão atual do sistema, o administrador do estabelecimento insere manualmente no banco de dados os valores cobrados pelo estacionamento. Atualmente, o campo de vigência está null no código. No entanto, a ideia é permitir que o administrador defina uma data específica como vigência. Isso ajudará a registrar as mudanças de preços no banco de dados, fornecendo maior controle sobre a validade dos valores praticados no estacionamento, além de criar um histórico dessas alterações.
+
+
+<details>
+  <summary>Modelo JSON para criar o documento mencionado:</summary>
+
+```
+{
+  "precoHora": 5,
+  "precosHora": [
+    {
+      "hora": 4,
+      "valor": 15
+    },
+    {
+      "hora": 6,
+      "valor": 25
+    }
+  ],
+  "vigencia": null
+}
+```
+
+</details>
+
+
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
+
+---------
 <a name="tecnologias"></a>
 ## 📍️ Tecnologias
 
-- As API's foram construídas em Java 17 utilizando Spring Framework 3.1.0
+- As API's foram construídas em Java 17 utilizando Spring Framework 3.1.4
 - Padrão REST na construção das rotas e retornos
 - SLF4J para registro de logs
 - Utilização de código limpo e princípios **SOLID**
@@ -694,7 +772,11 @@ curl --location 'http://localhost:8080/estacionamentos/6544269962cd7f53cfcbb87e/
 <a name="desafios"></a>
 ## 📍️ Desafios
 
-**FASE 3**  
+No decorrer do desenvolvimento do Sistema de Gestão de Parquímetro (SGP), enfrentamos desafios significativos, destacando-se a transição para o uso do MongoDB, que demandou uma mudança na abordagem do banco de dados. A adaptação da equipe a um modelo NoSQL, saindo do tradicional banco relacional, foi um processo desafiador que exigiu revisão de práticas e estratégias de desenvolvimento.
+
+Além disso, um dos maiores obstáculos que enfrentamos foi relacionado ao deployment na AWS (Amazon Web Services) e suas configurações. A complexidade das configurações e otimizações necessárias para garantir um ambiente estável e escalável na nuvem representou um desafio adicional para a equipe. A curva de aprendizado para lidar com as peculiaridades do ambiente de nuvem AWS foi um processo desafiador que demandou tempo e esforço consideráveis.
+
+Esses desafios, tanto na transição para o MongoDB quanto no deploy na AWS, exigiram que a equipe superasse obstáculos técnicos e se adaptasse a novos paradigmas tecnológicos, resultando em um aprendizado valioso e na capacidade aprimorada de lidar com complexidades técnicas em futuros projetos. 
 
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>

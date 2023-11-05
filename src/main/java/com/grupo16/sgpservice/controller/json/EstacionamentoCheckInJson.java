@@ -1,5 +1,7 @@
 package com.grupo16.sgpservice.controller.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoVariavel;
@@ -11,6 +13,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
+@JsonInclude(Include.NON_NULL)
 public class EstacionamentoCheckInJson {
 	private String id;
 	private Long quantidadeHoras;

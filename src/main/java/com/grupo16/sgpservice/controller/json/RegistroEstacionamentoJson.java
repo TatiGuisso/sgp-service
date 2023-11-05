@@ -2,11 +2,14 @@ package com.grupo16.sgpservice.controller.json;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoBase;
 import com.grupo16.sgpservice.domain.RegistroEstacionamentoPeriodoFixo;
 
 import lombok.Getter;
 
+@JsonInclude(Include.NON_NULL)
 @Getter
 public class RegistroEstacionamentoJson {
 	private String id;
